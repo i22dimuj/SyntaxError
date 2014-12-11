@@ -8,7 +8,7 @@ class InterfazAgenda
 private:
 
 public:
-	visualizar_contacto()
+	Contacto::visualizar_contacto()
 
 
 };
