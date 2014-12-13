@@ -2,9 +2,10 @@
 #define AGENDAPROJECT_HPP
 
 #include <iostream>
-#include <Contacto.hpp>
 #include <list>
 #include <string>
+
+#include "Contacto.hpp"
 
 class Agenda
 {

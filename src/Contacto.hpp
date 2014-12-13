@@ -18,8 +18,8 @@ class Contacto{
 	string _DNI;
 	string _email;
 	vector <string> _telefono;
-	vector <RedSocial> _redSocial;
-	vector <DireccionPostal> _direccionPostal;
+//	vector <RedSocial> _redSocial;
+//	vector <DireccionPostal> _direccionPostal;
 
 	bool _favorito;
 	int _busquedas;

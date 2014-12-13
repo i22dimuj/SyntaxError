@@ -8,9 +8,10 @@ class InterfazAgenda
 private:
 
 public:
-	Contacto::visualizar_contacto()
-
-
+	int menu();
+	void imprimirAgenda();
+	void verFavoritos();
+	void verFrecuentes();
 };
 
 
