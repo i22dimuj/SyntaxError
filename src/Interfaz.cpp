@@ -10,7 +10,7 @@ class InterfazAgenda
 {
 	void iniciarAgenda()
 	{
-		while(menuFuncion(menuAgenda()));
+		while(!menuFuncion(menuAgenda()));
 	}
 
 	int menuAgenda()
