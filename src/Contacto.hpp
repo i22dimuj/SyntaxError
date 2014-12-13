@@ -73,12 +73,5 @@ class Contacto{
 
 
 
-
-
-
-
-
-
-
 };
 #endif
