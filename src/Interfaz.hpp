@@ -1,7 +1,7 @@
 #ifndef INTERFAZ_HPP
 #define INTERFAZ_HPP
 #include <iostream>
-#include <AgendaProject.cpp>
+#include "Agenda.hpp"
 
 class InterfazAgenda
 {
