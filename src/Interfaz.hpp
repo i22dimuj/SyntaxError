@@ -8,7 +8,9 @@ class InterfazAgenda
 private:
 
 public:
-	int menu();
+	void iniciarAgenda(); //Inicia la agenda (graficamente)
+	int menuAgenda();
+	bool menuFuncion(int opc); //Devuelve FALSE si no se quiere salir, si se quiere salir devuelve TRUE
 	void imprimirAgenda();
 	void verFavoritos();
 	void verFrecuentes();
