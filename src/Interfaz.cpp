@@ -8,7 +8,12 @@ using namespace std;
 
 class InterfazAgenda
 {
-	int menu()
+	void iniciarAgenda()
+	{
+		while(menuFuncion(menuAgenda()));
+	}
+
+	int menuAgenda()
 	{
 		int salir = 0, seleccion;
 
@@ -42,6 +47,65 @@ class InterfazAgenda
 
 		}
 		return seleccion;
+	}
+
+	bool menuFuncion(int opc)
+	{
+		switch(opc)
+		{
+		case 1: //Buscar contacto
+
+			break;
+
+		case 2: //Añadir contacto
+
+			break;
+
+		case 3: //Modificar contacto
+
+			break;
+
+		case 4: //Imprimir Agenda
+			imprimirAgenda();
+			break;
+
+		case 5: //Copia de seguridad
+
+			break;
+
+		case 6: //Borrar contacto
+
+			break;
+
+		case 7: //Mostrar frecuentes
+			verFrecuentes();
+			break;
+
+		case 8: //Mostrar favoritos
+			verFavoritos();
+			break;
+
+		case 0: //Salir
+			return false;
+			break;
+
+		default:
+			cout << "Ha habido un problema en menuFunion" << cout;
+		}
+		return true;
+	}
+
+	void imprimirAgenda()
+	{
+
+	}
+	void verFavoritos()
+	{
+
+	}
+	void verFrecuentes()
+	{
+
 	}
 };
 
