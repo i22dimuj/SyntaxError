@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Agenda.hpp"
 
-class InterfazAgenda
+class Interfaz
 {
 private:
 

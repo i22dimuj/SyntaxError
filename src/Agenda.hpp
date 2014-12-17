@@ -7,21 +7,23 @@
 
 #include "Contacto.hpp"
 
-class Agenda
-{
-private:
-	std::list <Contacto> _contactos;
-	std::list <Contacto> _frecuentes;
+//using namespace std; NO HABRIA COLISION DE FUNCIONES
 
-public:
-	Agenda(){};
-	Agenda(Agenda::agenda){};
-	/*
-	 * buscar
-	 * insertar
-	 * borrar
-	 * modificar
-	 */
+class Agenda {
+	private:
+		std::list <Contacto> _contactos;
+		std::list <Contacto> _frecuentes;
+		std::string fichero;
+
+	public:
+		Agenda();
+		Agenda(Agenda &agenda);
+		/*
+		 * buscar
+		 * insertar
+		 * borrar
+		 * modificar
+		 */
 
 
 };

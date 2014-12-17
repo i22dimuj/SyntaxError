@@ -2,9 +2,5 @@
 #include <list>
 #include "AgendaProject.hpp"
 
-class Agenda
-{
 
-
-};
 
