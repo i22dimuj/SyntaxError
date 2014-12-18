@@ -5,8 +5,6 @@
 
 class Interfaz: public Agenda
 {
-private:
-
 public:
 	void iniciarAgenda(); //Inicia la agenda (graficamente)
 	int menuAgenda();
