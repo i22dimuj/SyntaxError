@@ -6,6 +6,7 @@
 #include <string>
 
 #include "Contacto.hpp"
+#include "GestorDB.hpp"
 
 namespace agenda {
 

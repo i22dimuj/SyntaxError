@@ -13,9 +13,13 @@
 namespace agenda {
 
 class GestorDB {
+private:
+	Agenda* _bd;
+
 public:
-	GestorDB();
+	GestorDB(Agenda* a);
 	virtual ~GestorDB();
+
 	virtual bool guardar(/*Agenda agenda*/);
 	virtual Agenda cargar(/*std::string fichero*/);
 };
