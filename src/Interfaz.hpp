@@ -3,7 +3,7 @@
 #include <iostream>
 #include "Agenda.hpp"
 
-class Interfaz
+class Interfaz: public Agenda
 {
 private:
 
@@ -15,6 +15,4 @@ public:
 	void verFavoritos();
 	void verFrecuentes();
 };
-
-
 #endif
