@@ -34,24 +34,24 @@ class Contacto {
 		std::string getApellido2() {return _apellido2;};
 		std::string getDNI() {return _dni;};
 		std::string getEmail() {return _email;};
-		std::list <std::string> getTelefono() {return _telefono;};
-		std::list <redSocial> getRedSocial() {return _redSocial;};
-		std::list <direccionPostal> getDireccionPostal() {return _direccionPostal;};
+		std::list<std::string> getTelefono() {return _telefono;};
+		std::list<redSocial> getRedSocial() {return _redSocial;};
+		std::list<direccionPostal> getDireccionPostal() {return _direccionPostal;};
 		bool esFavorito() {return _favorito;};
 		int numeroBusquedas() {return _frecuente;};
 
-			//Modificadores
+		//Modificadores
 		void setNombre(std::string nombre) {_nombre = nombre;};
 		void setApellido1(std::string apellido) {_apellido1 = apellido;};
 		void setApellido2(std::string apellido) {_apellido2 = apellido;};
-		void setDNI(std::string DNI) {_dni = DNI;};
+		void setDNI(std::string dni) {_dni = dni;};
 		void setEmail(std::string email) {_email = email;};
-		void nuevoTelefono(std::string telefono) {_telefono.push_back(telefono);};
-		void nuevaDireccionPostal(direccionPostal direccion) {_direccionPostal.push_back(direccion);};
-		void nuevaRedSocial(redSocial red) {_redSocial.push_back(red);};
-		void buscado() {_frecuente++;};
 
-		void cambiaFavorito() { _favorito ? _favorito = false : _favorito = true;};
+		void addTelefono(std::string telefono) {_telefono.push_back(telefono);};
+		void addDireccionPostal(direccionPostal direccion) {_direccionPostal.push_back(direccion);};
+		void addRedSocial(redSocial red) {_redSocial.push_back(red);};
+		void buscado() {_frecuente++;};
+		void cambiaFavorito() { _favorito ? _favorito = false : _favorito = true;}; //if(true) _fav= false; else _fav = true;
 };
 }
 #endif
