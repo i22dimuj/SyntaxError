@@ -2,8 +2,11 @@
 #define INTERFAZ_HPP
 #include <iostream>
 #include "Agenda.hpp"
+#include "Contacto.hpp"
 
-class Interfaz
+namespace agenda {
+
+class Interfaz: public Agenda
 {
 private:
 
@@ -14,7 +17,9 @@ public:
 	void imprimirAgenda();
 	void verFavoritos();
 	void verFrecuentes();
+	//Contacto rellenarPersona() {};
+
 };
 
-
+}
 #endif

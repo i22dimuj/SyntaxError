@@ -3,75 +3,56 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
+#include <list>
+#include "Estructuras.hpp"
 
-using namespace std;
+namespace agenda {
 
-class Contacto{
+class Contacto {
 
 	private:
-		string _nombre;
-		string _apellido1;
-		string _apellido2;
-		string _DNI;
-		string _email;
-		vector <string> _telefono;
-	//	vector <RedSocial> _redSocial;
-	//	vector <DireccionPostal> _direccionPostal;
-
-	bool _favorito;
-	int _busquedas;
+		std::string _nombre;
+		std::string _apellido1;
+		std::string _apellido2;
+		std::string _dni;
+		std::string _email;
+		std::list <std::string> _telefono;
+		std::list <redSocial> _redSocial;
+		std::list <direccionPostal> _direccionPostal;
+		bool _favorito;
+		int _frecuente;
 
 	public:
 
 		//Constructores
-		Contacto(string DNI, string nombre, string apellido1, string apellido2, string telefono){
-	
-			_DNI = DNI;
-			_nombre = nombre;
-			_apellido1 = apellido1;
-			_apellido2 = apellido2;
-			_telefono.push_back(telefono);
-		}
-
-		Contacto(){rellenarPersona();};
-
-
+		Contacto();
+		Contacto(std::string dni, std::string nombre, std::string apellido1, std::string apellido2, std::string telefono);
 
 		//Observadores
-		string getNombre(){return _nombre;};
-		string getApellido1(){return _apellido1;};
-		string getApellido2(){return _apellido2;};
-		string getDNI(){return _DNI;};
-		string getEmail(){return _email;};
-		vector <string> getTelefono(){return _telefono;};		//Ni zorra de como se hacian estos dos gets que tienen que devolver el vector entero
-		vector <RedSocial> getRedSocial(){return _redSocial;};
-		vector <DireccionPostal> getDireccionPostal(){return _direccionPostal;};
-		bool esFavorito(){return _favorito;};
-		int numeroBusquedas(){return _busquedas;};
+		std::string getNombre() {return _nombre;};
+		std::string getApellido1() {return _apellido1;};
+		std::string getApellido2() {return _apellido2;};
+		std::string getDNI() {return _dni;};
+		std::string getEmail() {return _email;};
+		std::list <std::string> getTelefono() {return _telefono;};
+		std::list <redSocial> getRedSocial() {return _redSocial;};
+		std::list <direccionPostal> getDireccionPostal() {return _direccionPostal;};
+		bool esFavorito() {return _favorito;};
+		int numeroBusquedas() {return _frecuente;};
 
 			//Modificadores
-		void setNombre(string nombre){_nombre = nombre;};
-		void setApellido1(string apellido){_apellido1 = apellido;};
-		void setApellido2(string apellido){_apellido2 = apellido;};
-		void setDNI(string DNI){_DNI = DNI;};
-		void setEmail(string email){_email = email};
-		void nuevoTelefono(string telefono){_telefono.push_back(telefono);};
-		void nuevaDireccionPostal(DireccionPostal direccion){_direccionPostal.push_back(direccion);};
-		void nuevaRedSocial(RedSocial red){_redSocial.push_back(red);};
-		void busqueda++(){_busquedas++;};
+		void setNombre(std::string nombre) {_nombre = nombre;};
+		void setApellido1(std::string apellido) {_apellido1 = apellido;};
+		void setApellido2(std::string apellido) {_apellido2 = apellido;};
+		void setDNI(std::string DNI) {_dni = DNI;};
+		void setEmail(std::string email) {_email = email;};
+		void nuevoTelefono(std::string telefono) {_telefono.push_back(telefono);};
+		void nuevaDireccionPostal(direccionPostal direccion) {_direccionPostal.push_back(direccion);};
+		void nuevaRedSocial(redSocial red) {_redSocial.push_back(red);};
+		void buscado() {_frecuente++;};
 
-		void cambiaFavorito(){
-
-			if(_favorito == FALSE)
-				_favorito = TRUE;
-	
-			else
-				_favorito = FALSE;
-		}
-
-
-
-
+		void cambiaFavorito() { _favorito ? _favorito = false : _favorito = true;};
 };
+}
 #endif
+

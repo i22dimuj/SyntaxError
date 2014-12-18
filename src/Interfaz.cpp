@@ -6,6 +6,8 @@
 
 using namespace std;
 
+namespace agenda {
+
 void Interfaz::iniciarAgenda()
 {
 	while(!menuFuncion(menuAgenda()));
@@ -106,3 +108,4 @@ void Interfaz::verFrecuentes()
 
 }
 
+}

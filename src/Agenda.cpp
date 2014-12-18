@@ -1,6 +1,9 @@
 #include <iostream>
 #include <list>
-#include "AgendaProject.hpp"
+#include "Agenda.hpp"
+
+namespace agenda {
+}
 
 
 

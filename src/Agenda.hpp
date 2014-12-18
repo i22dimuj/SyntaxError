@@ -7,7 +7,7 @@
 
 #include "Contacto.hpp"
 
-//using namespace std; NO HABRIA COLISION DE FUNCIONES
+namespace agenda {
 
 class Agenda {
 	private:
@@ -27,4 +27,5 @@ class Agenda {
 
 
 };
+}
 #endif
