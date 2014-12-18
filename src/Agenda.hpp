@@ -11,21 +11,20 @@ namespace agenda {
 
 class Agenda {
 	private:
+		std::string fichero;
 		std::list <Contacto> _contactos;
 		std::list <Contacto> _frecuentes;
-		std::string fichero;
+		GestorDB* _bd;
 
 	public:
-		Agenda();
+		Agenda(GestorDB* g);
 		Agenda(Agenda &agenda);
-		/*
-		 * buscar
-		 * insertar
-		 * borrar
-		 * modificar
-		 */
 
-
+		std::list <Contacto> buscar(std::string apellido1);
+		bool insertar(Contacto contacto);
+		bool borrar(std::string apellido1);
+		bool modificar(Contacto contacto);
+		bool guardar(); //Copia de seguridad ¿?
 };
 }
 #endif

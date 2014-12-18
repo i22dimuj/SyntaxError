@@ -6,8 +6,7 @@
 
 namespace agenda {
 
-class Interfaz: public Agenda
-{
+class Interfaz {
 private:
 
 public:
