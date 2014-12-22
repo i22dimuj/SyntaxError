@@ -23,6 +23,9 @@ Contacto::Contacto(){
 
 
 
+
+
+
 	_dni = dni;
 	_nombre = nombre;
 	_apellido1 = apellido1;

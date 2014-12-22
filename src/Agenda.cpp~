@@ -60,13 +60,16 @@ bool Agenda::borrar(string dni){
 
 	for(iter = _contactos.begin(); iter != _contactos.end(); iter++){
 
-		if(iter->getDNI() == dni){
+		if(iter->getDNI() == dni)
 			iter->erase();
-		  return true;
-		}
 	}
 
-  return false;
+
+
+
+
+
+
 }
 
 }

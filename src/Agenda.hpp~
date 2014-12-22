@@ -24,7 +24,7 @@ class Agenda {
 
 		std::list <Contacto> buscar(std::string apellido1);
 		bool insertar(Contacto contacto);
-		bool borrar(std::string dni);
+		bool borrar(std::string apellido1);
 		bool modificar(Contacto contacto);
 		bool guardar(); //Copia de seguridad ¿?
 };
