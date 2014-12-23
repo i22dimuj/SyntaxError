@@ -8,45 +8,37 @@ using namespace std;
 
 namespace agenda {
 
-void Interfaz::iniciarAgenda()
-{
-	while(!menuFuncion(menuAgenda()));
-}
-
 int Interfaz::menuAgenda()
 {
-	int salir = 0, seleccion;
+	int salir = 1, seleccion;
 
+	system("cls");
+	cout << "----- Agenda -----" << endl << endl;
+	cout << "Menu:" << endl;
+	cout << "1) Buscar contacto" << endl;
+	cout << "2) Añadir contacto" << endl;
+	cout << "3) Modificar contacto" << endl;
+	cout << "4) Imprimir lista de contactos" << endl;
+	cout << "5) Copia de seguridad" << endl;
+	cout << "6) Borrar contacto" << endl;
+	cout << "7) Contactos frecuentes" << endl;
+	cout << "8) Contactos favoritos" << endl;
+	cout << "0) Salir" << endl << endl;
+	cout << "Seleccione una opción y pulse enter: ";
 
-	while (salir == 0)
+	cin >> seleccion;
+
+	if (seleccion == 0)
+		return 0; //Le indicamos al main que salga
+
+	if ((seleccion < 0) || (seleccion > 8))
 	{
-		system("cls");
-		cout << "----- Agenda -----" << endl << endl;
-		cout << "Menu:" << endl;
-		cout << "1) Buscar contacto" << endl;
-		cout << "2) Añadir contacto" << endl;
-		cout << "3) Modificar contacto" << endl;
-		cout << "4) Imprimir lista de contactos" << endl;
-		cout << "5) Copia de seguridad" << endl;
-		cout << "6) Borrar contacto" << endl;
-		cout << "7) Contactos frecuentes" << endl;
-		cout << "8) Contactos favoritos" << endl;
-		cout << "0) Salir" << endl << endl;
-		cout << "Seleccione una opción y pulse enter: ";
-
-		cin >> seleccion;
-		if ((seleccion >= 0) || (seleccion < 5))
-		{
-			salir = 1;
-		}
-		else
-		{
-			cout << "Seleccione una opcion correcta (pulse cualquier tecla para continuar):";
-			getchar();
-		}
-
+		cout << "Seleccione una opcion valida (persione enter): " << endl;
+		getchar();
 	}
-	return seleccion;
+	else
+		menuFuncion(seleccion);
+	return 1; //Le indicamos  al main que no salga
 }
 
 bool Interfaz::menuFuncion(int opc)
@@ -95,6 +87,38 @@ bool Interfaz::menuFuncion(int opc)
 	return true;
 }
 
+Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos)
+{
+	list <Contacto>::iterator iter;
+	int i = 0, seleccion;
+
+	system("clear");
+
+	for (iter = listaContactos.begin(); iter != listaContactos.end(); iter++)
+	{
+		cout << i << ") " << iter->getNombre() << " " << iter->getApellido1() << " " << iter->getApellido2() << endl;
+	}
+	cout << endl << "Seleccione el contacto deseado: " << endl;
+	cin >> seleccion;
+
+	iter = listaContactos.begin();
+	advance(iter, seleccion);
+
+	return iter;
+
+}
+
+void Interfaz::imprimeContacto(Contacto contacto)
+{
+	system("clear");
+	cout << "Nombre: " << contacto.getNombre() << endl;
+	cout << "Apellidos: " << contacto.getApellido1() << " " << contacto.getApellido2() << endl;
+	cout << "DNI: " << contacto.getDNI() << endl;
+	/*
+	 * Imprimir resto de imformacion
+	 */
+}
+
 void Interfaz::imprimirAgenda()
 {
 
@@ -108,4 +132,4 @@ void Interfaz::verFrecuentes()
 
 }
 
-}
+} //Namespace Agenda

@@ -10,6 +10,8 @@
 
 #include "Agenda.hpp"
 
+class Agenda; //Hay que definir la clase aunque la definicion vaya en Agenda.hpp
+
 namespace agenda {
 
 class GestorDB {

@@ -19,8 +19,9 @@ bool agenda::Agenda::guardar() {
 bool Agenda::insertar(Contacto contacto) {
 
 	if(_contactos.push_back(contacto))  //Hacer el sort dentro del if
+	{
 		
-
+	}
 	else
 		return false;
 

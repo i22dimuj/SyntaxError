@@ -8,9 +8,10 @@ namespace agenda {
 
 class Interfaz {
 private:
+	Contacto seleccionaContacto(std::list <Contacto> listaContactos);
+	void imprimeContacto(Contacto contacto);
 
 public:
-	void iniciarAgenda(); //Inicia la agenda (graficamente)
 	int menuAgenda();
 	bool menuFuncion(int opc); //Devuelve FALSE si no se quiere salir, si se quiere salir devuelve TRUE
 	void imprimirAgenda();
