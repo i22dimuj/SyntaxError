@@ -97,6 +97,7 @@ Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos)
 	for (iter = listaContactos.begin(); iter != listaContactos.end(); iter++)
 	{
 		cout << i << ") " << iter->getNombre() << " " << iter->getApellido1() << " " << iter->getApellido2() << endl;
+		i++;
 	}
 	cout << endl << "Seleccione el contacto deseado: " << endl;
 	cin >> seleccion;
