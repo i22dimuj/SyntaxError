@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstdio>
+#include <string>
 #include "Interfaz.hpp"
 #include "Agenda.hpp"
 
@@ -118,6 +119,31 @@ void Interfaz::imprimeContacto(Contacto contacto)
 	/*
 	 * Imprimir resto de imformacion
 	 */
+}
+
+Contacto Interfaz::rellenarContacto() {
+
+	Contacto contacto = new Contacto;
+	string dni, nombre, apellido1, apellido2, telefono;
+
+	cout<<"\nIntroduce el nombre del nuevo Contacto: ";
+	cin >> nombre;
+	cout<<"Introduce el primer apellido del nuevo Contacto: ";
+	cin >> apellido1;
+	cout<<"Introduce el segundo apellido del nuevo Contacto: ";
+	cin >> apellido2;
+	cout<<"Introduce el DNI del nuevo Contacto: ";
+	cin >> dni;
+	cout<<"Introduce el telefono del nuevo Contacto: ";
+	cin >> telefono;
+
+	contacto.setDNI(dni);
+	contacto.setNombre(nombre);
+	contacto.setApellido1(apellido1);
+	contacto.setApellido2(apellido2);
+	contacto.addTelefono(telefono);
+
+	return contacto;
 }
 
 void Interfaz::imprimirAgenda()
