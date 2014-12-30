@@ -89,7 +89,10 @@ bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 		contactoNuevo.addTelefono(contactoViejo.getTelefono());
 	}
 	*/
-	return false;
+	borrar(contactoViejo.getDNI());
+	insertar(contactoNuevo);
+
+	return true;
 }
 
 
