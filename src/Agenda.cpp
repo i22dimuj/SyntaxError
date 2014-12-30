@@ -19,7 +19,7 @@ bool Agenda::insertar(Contacto contacto) {
 
 	if(_contactos.push_back(contacto))  //Hacer el sort dentro del if
 	{
-		//Ordenar por apellido
+		ordenaAgenda(_contactos); //Ordenar por apellido
 		return true;
 	} else {
 		return false;
@@ -37,8 +37,10 @@ list <Contacto> Agenda::buscar(string apellido1) {
 		}
 	}
 
-	if(encontrados == 0)	//Devolver un error si no se encuentra nada???
+	if (encontrados == 0)
+	{
 		return NULL;
+	}
 
 	return aux;
 }
@@ -52,5 +54,16 @@ bool Agenda::borrar(string dni) {
 	}
   return false;
 }
+
+bool comparaContactos(Contacto &a, Contacto &b)
+{
+	return a.getApellido1() < b.getApellido1();
+}
+
+void ordenaAgenda(list <Contacto> lista)
+{
+	lista.sort(comparaContactos);
+}
+
 
 }
