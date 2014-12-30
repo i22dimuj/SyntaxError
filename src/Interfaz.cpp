@@ -59,6 +59,16 @@ bool Interfaz::menuFuncion(int opc)
 		break;
 
 	case 3: //Modificar contacto
+		string apellido;
+		Contacto aux, aux2;
+
+		cout << "Introduzca el apellido de la persona que quiere modificar: ";
+		cin << apellido;
+		aux = seleccionaContacto(Agenda::buscar(apellido));
+		cout << "--------------------------" << endl;
+		aux2 = rellenaContacto();
+
+		Agenda::modificar(aux, aux2);
 
 		break;
 
@@ -71,11 +81,11 @@ bool Interfaz::menuFuncion(int opc)
 		break;
 
 	case 6: //Borrar contacto
-		string DNI;
+		string dni;
 		cout << "Introduzca el DNI de la persona que quiere borrar: ";
-		cin >> DNI;
+		cin >> dni;
 
-		if (Agenda::borrar(DNI))
+		if (Agenda::borrar(dni))
 			cout << "Borrado efectuado con exito" << endl;
 		else
 			cout << "No se ha podido borrar el contacto. Quizas el DNI introducino no exista." << endl;

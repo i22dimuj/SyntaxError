@@ -48,6 +48,7 @@ class Contacto {
 		void setEmail(std::string email) {_email = email;};
 
 		void addTelefono(std::string telefono) {_telefono.push_back(telefono);};
+		void addTelefono(std::list <std::string> telefonos) {_telefono = telefonos;}; //Sobrecargado para poder utilizarlo en modificarContato()
 		void addDireccionPostal(direccionPostal direccion) {_direccionPostal.push_back(direccion);};
 		void addRedSocial(redSocial red) {_redSocial.push_back(red);};
 		void buscado() {_frecuente++;};

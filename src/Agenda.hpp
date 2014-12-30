@@ -29,7 +29,7 @@ class Agenda {
 		std::list <Contacto> buscar(std::string apellido1);
 		bool insertar(Contacto contacto);
 		bool borrar(std::string dni);
-		bool modificar(Contacto contacto);
+		bool modificar(Contacto contactoViejo, Contacto contactoNuevo);
 		bool guardar(); //Copia de seguridad ¿?
 };
 }

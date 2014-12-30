@@ -65,5 +65,32 @@ void ordenaAgenda(list <Contacto> lista)
 	lista.sort(comparaContactos);
 }
 
+bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
+{
+	if (contactoNuevo.getNombre() == "")
+	{
+		contactoNuevo.setNombre(contactoViejo.getNombre());
+	}
+	if (contactoNuevo.getApellido1() == "")
+	{
+		contactoNuevo.setApellido1(contactoViejo.getApellido1());
+	}
+	if (contactoNuevo.getApellido2() == "")
+	{
+		contactoNuevo.setApellido2(contactoViejo.getApellido2());
+	}
+	if (contactoNuevo.getDNI() == "")
+	{
+		contactoNuevo.setDNI(contactoViejo.getDNI());
+	}
+	/* Hay que hacerlo de otra forma
+	if (contactoNuevo.getTelefono() == "")
+	{
+		contactoNuevo.addTelefono(contactoViejo.getTelefono());
+	}
+	*/
+	return false;
+}
+
 
 }
