@@ -71,6 +71,17 @@ bool Interfaz::menuFuncion(int opc)
 		break;
 
 	case 6: //Borrar contacto
+		string DNI;
+		cout << "Introduzca el DNI de la persona que quiere borrar: ";
+		cin >> DNI;
+
+		if (Agenda::borrar(DNI))
+			cout << "Borrado efectuado con exito" << endl;
+		else
+			cout << "No se ha podido borrar el contacto. Quizas el DNI introducino no exista." << endl;
+
+		cout << "Pulse enter para continuar" << endl;
+		getchar();
 
 		break;
 

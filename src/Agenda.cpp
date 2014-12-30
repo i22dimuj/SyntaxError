@@ -48,7 +48,7 @@ list <Contacto> Agenda::buscar(string apellido1) {
 bool Agenda::borrar(string dni) {
 	for(list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
 		if(iter->getDNI() == dni) {
-			//eliminar contacto con dni
+			_contactos.erase(iter);//eliminar contacto con dni
 			return true;
 		}
 	}
