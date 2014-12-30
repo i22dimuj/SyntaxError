@@ -18,12 +18,14 @@ class Agenda {
 		std::list <Contacto> _frecuentes;
 		GestorDB* _bd;
 		bool comparaContactos(const Contacto &a, const Contacto &b);
+		void ordenaAgenda(std::list <Contacto> lista);
 
 	public:
 		Agenda(GestorDB* g);
 		Agenda(Agenda &agenda);
 
-		void ordenaAgenda(std::list <Contacto> lista);
+		std::list <Contacto> getContactos() {return _contactos;};
+		std::list <Contacto> getFrecuentes() {return _frecuentes;};
 		std::list <Contacto> buscar(std::string apellido1);
 		bool insertar(Contacto contacto);
 		bool borrar(std::string dni);

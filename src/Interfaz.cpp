@@ -47,10 +47,14 @@ bool Interfaz::menuFuncion(int opc)
 	switch(opc)
 	{
 	case 1: //Buscar contacto
-
+		string apellido;
+		cout << "Introduzca el apellido de la persona que quiere buscar: ";
+		cin << apellido;
+		imprimeContacto(seleccionaContacto(Agenda::buscar(apellido)));
 		break;
 
 	case 2: //Añadir contacto
+		Agenda::insertar(rellenaContacto());
 
 		break;
 
@@ -106,7 +110,7 @@ Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos)
 	iter = listaContactos.begin();
 	advance(iter, seleccion);
 
-	return iter;
+	return *iter;
 
 }
 
@@ -148,6 +152,18 @@ Contacto Interfaz::rellenarContacto() {
 
 void Interfaz::imprimirAgenda()
 {
+	list <Contacto> aux;
+	list <Contacto>::iterator iter;
+
+	aux = Agenda::getContactos;
+
+	system("clear");
+
+	for (iter = aux.begin(); iter != aux.end(); iter++)
+	{
+		imprimeContacto(*iter);
+		cout << endl << "------------------------------------------------------" << endl << endl;
+	}
 
 }
 void Interfaz::verFavoritos()
