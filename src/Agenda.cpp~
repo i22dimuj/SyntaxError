@@ -42,7 +42,7 @@ list <Contacto> Agenda::buscar(string apellido1) {
 	for(list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
 		if(iter->getApellido1() == apellido1) {
 			aux.push_back(*iter);
-			iter->buscado();	//Incrementamos el numero de _frecuente
+			iter->buscado();
 			encontrados++;
 		}
 	}

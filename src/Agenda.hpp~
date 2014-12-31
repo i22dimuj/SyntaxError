@@ -30,7 +30,7 @@ class Agenda {
 		std::list <Contacto> getContactos() {return _contactos;};
 		std::list <Contacto> getFrecuentes() {return _frecuentes;};
 
-				//Modificadores para copiar objeto Agenda en clase Interfaz  ¿Necesario?
+				//Modificadores para copiar objeto Agenda en clase Interfaz
 		void setFichero(std::string fich) {fichero = fich;};
 		void setGestorDB(GestorDB* bd) {_bd = bd};
 		void setContactos(std::list <Contacto> contactos) {_contactos = contactos};

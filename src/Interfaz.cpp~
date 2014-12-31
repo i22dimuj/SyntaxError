@@ -264,6 +264,8 @@ void Interfaz::verFrecuentes()
 			cout << contacto.getDNI() << endl;
 		}
 	}
+
+
 }
 
 } //Namespace Agenda
