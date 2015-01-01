@@ -4,6 +4,7 @@
 #include <string>
 #include "Interfaz.hpp"
 #include "Agenda.hpp"
+#include "Contacto.hpp"
 #include "Estructuras.hpp"
 
 using namespace std;
@@ -234,9 +235,7 @@ void Interfaz::verFavoritos()
 	{
 		if(iter->esFavorito()){
 
-			cout << iter->getNombre() << " ";
-			cout << iter->getApellido1() << " " << iter->getApellido2() << " - ";
-			cout << iter->getDNI() << endl << endl;
+			imprimeContacto(*iter);
 		}
 		
 	}
@@ -259,10 +258,38 @@ void Interfaz::verFrecuentes()
 	{
 		if(iter->esFavorito()){
 
-			cout << contacto.getNombre() << " ";
-			cout << contacto.getApellido1() << " " << contacto.getApellido2() << " - ";
-			cout << contacto.getDNI() << endl;
+			imprimeContacto(*iter);
 		}
+	}
+}
+void Interfaz::imprimeDireccionPostal(Contacto contacto){
+	list <direccionPostal> listaDir;
+	list <direccionPostal>::iterator iter;
+
+	listaDir = contacto.getDireccionPostal();
+
+	cout << "Municipio: " << iter->municipio << endl;
+	cout << "Provincia: " << iter->provincia << endl;
+	cout << "Calle: " << iter->calle << endl;
+	cout << "Portal: " << iter->portal << endl;
+	cout << "Piso : " << iter->piso << endl;
+	cout << "Puerta: " << iter->puerta << endl;
+	cout << "Codigo Postal : " << iter->codigoPostal << endl;
+
+}
+
+void Interfaz::imprimeRedSocial(Contacto contacto){
+	list <redSocial> listaRed;
+	list <redSocial>::iterator iter;
+
+	listaRed = contacto.getRedSocial();
+
+	for (iter = listaRed.begin(); iter != listaRed.end(); iter++)
+	{
+		cout << "twitter: " << iter->twitter << endl;
+		cout << "facebook: " << iter->facebook << endl;
+		cout << "gPlus: " << iter->gPlus << endl;
+		cout << "url: " << iter->url << endl;
 	}
 }
 

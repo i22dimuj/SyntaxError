@@ -23,6 +23,8 @@ class Interfaz {
 		void imprimirAgenda();
 		void verFavoritos();
 		void verFrecuentes();
+		void imprimeDireccionPostal(Contacto contacto);
+		void imprimeRedSocial(Contacto contacto);
 
 };
 
