@@ -255,13 +255,11 @@ void Interfaz::verFrecuentes()
 	system("clear");
 
 	for (iter = aux.begin(); iter != aux.end(); iter++)
-	{
-		if(iter->esFavorito()){
+		imprimeContacto(*iter);
 
-			imprimeContacto(*iter);
-		}
-	}
 }
+
+
 void Interfaz::imprimeDireccionPostal(Contacto contacto){
 	list <direccionPostal> listaDir;
 	list <direccionPostal>::iterator iter;

@@ -43,6 +43,7 @@ list <Contacto> Agenda::buscar(string apellido1) {
 		if(iter->getApellido1() == apellido1) {
 			aux.push_back(*iter);
 			iter->buscado();	//Incrementamos el numero de _frecuente
+			actualizarFrecuentes(*iter);  //actualizamos la lista de frecuentes
 			encontrados++;
 		}
 	}
@@ -56,9 +57,21 @@ list <Contacto> Agenda::buscar(string apellido1) {
 }
 
 bool Agenda::borrar(string dni) {
+
+  list <Contacto>::iterator iterf;
+
 	for(list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
 		if(iter->getDNI() == dni) {
 			_contactos.erase(iter);//eliminar contacto con dni
+
+			
+			//Eliminamos contacto de lista de frecuentes (si existe)
+			for(iterf = _frecuentes.begin(); iterf != _frecuentes.end(); iterf++) {
+				if(iterf->getDNI() == dni)
+
+					_frecuentes.erase(iterf);	
+			}
+
 			return true;
 		}
 	}
@@ -105,5 +118,33 @@ bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 	return true;
 }
 
+
+void actualizarFrecuentes(Contacto frecuente)
+{
+
+	if(_frecuentes.empty())
+		_frecuentes.push_back(frecuente);
+
+	
+  list <Contacto>::iterator iter;
+
+	for(iter = _frecuentes.begin(); iter != _frecuentes.end(); iter++){
+
+		if(iter->getDNI() == frecuente.getDNI()){
+
+			iter->buscado();  //frecuente++ en lista de frecuentes
+			
+		  list <Contacto>::iterator iter_aux;
+
+			iter_aux = (iter-1);
+
+			if(iter->getFrecuente() > iter_aux->getFrecuente()){  //Si al aumentar el numero de busquedas, supera al anterior, hay que reordenar la lista de frecuentes ¿Como se hace?
+
+
+
+			}				
+		}
+	}
+}
 
 }

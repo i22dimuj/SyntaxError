@@ -42,6 +42,8 @@ class Agenda {
 		bool borrar(std::string dni);
 		bool modificar(Contacto contactoViejo, Contacto contactoNuevo);
 		bool guardar(); //Copia de seguridad ¿?
+
+		void actualizarFrecuentes(Contacto frecuente);
 };
 }
 #endif
