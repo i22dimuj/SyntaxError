@@ -8,14 +8,21 @@
 #ifndef GESTORDBFICHERO_HPP_
 #define GESTORDBFICHERO_HPP_
 
+#include <string>
+#include "Agenda.hpp"
 #include "GestorDB.hpp"
 
 namespace agenda {
 
 class GestorDBFichero : public GestorDB {
-public:
-	GestorDBFichero();
-	virtual ~GestorDBFichero();
+
+  public:
+
+	GestorDBFichero(){};
+	~GestorDBFichero(){};
+	
+	bool guardar(const Agenda &a);
+	Agenda cargar(const std::string &fichero);
 };
 
 } /* namespace agenda */

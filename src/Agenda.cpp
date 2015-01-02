@@ -133,22 +133,27 @@ void Agenda::actualizarFrecuentes(Contacto frecuente)
 
 	
   list <Contacto>::iterator iter;
+  int encontrado = 0;
 
 	for(iter = _frecuentes.begin(); iter != _frecuentes.end(); iter++){
 
 		if(iter->getDNI() == frecuente.getDNI()){
 
 			iter->buscado();  //frecuente++ en lista de frecuentes
+			encontrado = 1;
 			
 		  list <Contacto>::iterator iter_aux;
 
-			iter_aux = (iter--);
+			iter_aux = (iter-1);
 
-			if(iter->getFrecuentes() > iter_aux->getFrecuentes()){  //Si al aumentar el numero de busquedas, supera al anterior, hay que reordenar la lista de frecuentes ¿Como se hace?
-				Agenda::ordenaAgenda(_frecuentes); //Esta funcion ordena listas de contacotos :D
-			}				
+			if(iter->getFrecuentes() > iter_aux->getFrecuentes())
+				Agenda::ordenaAgenda(_frecuentes);
+						
 		}
 	}
+
+	if(encontrado == 0)	//Si no esta en la lista, se añade
+		_frecuentes.push_back(contacto);
 }
 
-}
+} //Namespace Agenda

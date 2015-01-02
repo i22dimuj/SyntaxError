@@ -8,6 +8,7 @@
 #ifndef GESTORDB_HPP_
 #define GESTORDB_HPP_
 
+#include <string>
 #include "Agenda.hpp"
 
 class Agenda; //Hay que definir la clase aunque la definicion vaya en Agenda.hpp
@@ -15,15 +16,11 @@ class Agenda; //Hay que definir la clase aunque la definicion vaya en Agenda.hpp
 namespace agenda {
 
 class GestorDB {
-private:
-	Agenda* _bd;
 
 public:
-	GestorDB(Agenda* a);
-	virtual ~GestorDB();
 
-	virtual bool guardar(/*Agenda agenda*/);
-	virtual Agenda cargar(/*std::string fichero*/);
+	virtual bool guardar(const Agenda &a) = 0;
+	virtual Agenda cargar(const std::string &fichero) = 0;
 };
 
 } /* namespace agenda */
