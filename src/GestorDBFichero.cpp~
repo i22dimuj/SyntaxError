@@ -71,6 +71,7 @@ GestorDBFichero::bool guardar(const Agenda &a){
 			flujoSalida << iter->puerta << ",";
 			flujoSalida << iter->codigoPostal << ",";  //¿Importa poner una coma al final en 
 		}						   //lugar de un \n?
+
 	}
 }
 
