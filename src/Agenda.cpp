@@ -24,14 +24,20 @@ bool Agenda::guardar() {
 }
 
 bool Agenda::insertar(Contacto contacto) {
-
-	if(_contactos.push_back(contacto))  //Hacer el sort dentro del if
+	// .push_back devuelve void, No se puede usar en un if()
+	/*
+	 if(_contactos.push_back(contacto))  //Hacer el sort dentro del if
 	{
 		ordenaAgenda(_contactos); //Ordenar por apellido
 		return true;
 	} else {
 		return false;
 	}
+	 */
+
+	_contactos.push_back(contacto);
+	ordenaAgenda(_contactos);
+	return true;
 }
 
 list <Contacto> Agenda::buscar(string apellido1) {
@@ -50,7 +56,7 @@ list <Contacto> Agenda::buscar(string apellido1) {
 
 	if (encontrados == 0)
 	{
-		return NULL;
+		return aux; //No se puede devolver Null. Devolvemos aux, porque si no se encuentran coincidencias sera una lista vacia
 	}
 
 	return aux;
@@ -119,7 +125,7 @@ bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 }
 
 
-void actualizarFrecuentes(Contacto frecuente)
+void Agenda::actualizarFrecuentes(Contacto frecuente)
 {
 
 	if(_frecuentes.empty())
@@ -136,12 +142,10 @@ void actualizarFrecuentes(Contacto frecuente)
 			
 		  list <Contacto>::iterator iter_aux;
 
-			iter_aux = (iter-1);
+			iter_aux = (iter--);
 
-			if(iter->getFrecuente() > iter_aux->getFrecuente()){  //Si al aumentar el numero de busquedas, supera al anterior, hay que reordenar la lista de frecuentes ¿Como se hace?
-
-
-
+			if(iter->getFrecuentes() > iter_aux->getFrecuentes()){  //Si al aumentar el numero de busquedas, supera al anterior, hay que reordenar la lista de frecuentes ¿Como se hace?
+				Agenda::ordenaAgenda(_frecuentes); //Esta funcion ordena listas de contacotos :D
 			}				
 		}
 	}

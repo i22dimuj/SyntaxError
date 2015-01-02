@@ -66,7 +66,9 @@ bool Interfaz::menuFuncion(int opc)
 		break;
 
 	case 2: //Añadir contacto
-		Agenda::insertar(rellenarContacto());
+		Contacto contacto;
+		contacto = rellenarContacto();
+		Agenda::insertar(contacto);
 
 		break;
 
@@ -78,7 +80,7 @@ bool Interfaz::menuFuncion(int opc)
 		cin << apellido;
 		aux = seleccionaContacto(Agenda::buscar(apellido));
 		cout << "--------------------------" << endl;
-		aux2 = rellenaContacto();
+		aux2 = rellenarContacto();
 
 		Agenda::modificar(aux, aux2);
 
@@ -165,17 +167,10 @@ void Interfaz::imprimeContacto(Contacto contacto)
 	cout << "Telefono/s: " << endl;
 	for(itert = contacto.getTelefono().begin(); itert != contacto.getTelefono().end(); itert++)	
 		cout << "	" << *itert << endl;
-
-	for(iterr = contacto.getRedSocial().begin(); iterr != contacto.getRedSocial().end(); iterr++){	
-		imprimeRedSocial(*iterr);
-		cout << "-----------------" << endl;
-	}
 	
-	for(iterd = contacto.getDireccionPostal().begin();iterd != contacto.getDireccionPostal().end();iterd++){
-		cout << "Direccion Postal " << i << endl << endl;	
-		imprimeDireccionPostal(*iterd);
-		cout << "-----------------" << endl;
-	}
+	imprimeRedSocial(contacto);
+	imprimeDireccionPostal(contacto);
+
 	
 }
 
@@ -266,13 +261,18 @@ void Interfaz::imprimeDireccionPostal(Contacto contacto){
 
 	listaDir = contacto.getDireccionPostal();
 
-	cout << "Municipio: " << iter->municipio << endl;
-	cout << "Provincia: " << iter->provincia << endl;
-	cout << "Calle: " << iter->calle << endl;
-	cout << "Portal: " << iter->portal << endl;
-	cout << "Piso : " << iter->piso << endl;
-	cout << "Puerta: " << iter->puerta << endl;
-	cout << "Codigo Postal : " << iter->codigoPostal << endl;
+	for (iter = listaDir.begin(); iter != listaDir.end(); iter++)
+	{
+		cout << "-----------------------------" << endl;
+		cout << "Municipio: " << iter->municipio << endl;
+		cout << "Provincia: " << iter->provincia << endl;
+		cout << "Calle: " << iter->calle << endl;
+		cout << "Portal: " << iter->portal << endl;
+		cout << "Piso : " << iter->piso << endl;
+		cout << "Puerta: " << iter->puerta << endl;
+		cout << "Codigo Postal : " << iter->codigoPostal << endl;
+		cout << "----------------------------" << endl;
+	}
 
 }
 
@@ -284,10 +284,12 @@ void Interfaz::imprimeRedSocial(Contacto contacto){
 
 	for (iter = listaRed.begin(); iter != listaRed.end(); iter++)
 	{
+		cout << "---------------------------" << endl;
 		cout << "twitter: " << iter->twitter << endl;
 		cout << "facebook: " << iter->facebook << endl;
 		cout << "gPlus: " << iter->gPlus << endl;
 		cout << "url: " << iter->url << endl;
+		cout << "---------------------------" << endl;
 	}
 }
 
