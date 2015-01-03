@@ -46,6 +46,7 @@ class Contacto {
 		void setApellido2(std::string apellido) {_apellido2 = apellido;};
 		void setDNI(std::string dni) {_dni = dni;};
 		void setEmail(std::string email) {_email = email;};
+		void setFrecuente(int frecuente) {_frecuente = frecuente;};
 
 		void addTelefono(std::string telefono) {_telefono.push_back(telefono);};
 		void addTelefono(std::list <std::string> telefonos) {_telefono = telefonos;}; //Sobrecargado para poder utilizarlo en modificarContato()
