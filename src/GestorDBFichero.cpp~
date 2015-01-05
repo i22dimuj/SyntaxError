@@ -195,8 +195,6 @@ GestorDBFichero::Agenda cargar(const string &fichero){
 
 	txt.close();
 
-
-  return a;
 }
 
 
