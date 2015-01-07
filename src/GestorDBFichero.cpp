@@ -53,8 +53,8 @@ bool GestorDBFichero::guardar(const Agenda &a) {
 
 		//Lista de redes sociales
 		flujoSalida << aux.getRedSocial().size() << ",";
-		for(list <redSocial>:: iterator iterr = aux.getRedSocial().begin(); iterr != aux.getRedSocial().end(); iterr++){
-
+		for (list <redSocial>:: iterator iterr = aux.getRedSocial().begin(); iterr != aux.getRedSocial().end(); iterr++)
+		{
 			flujoSalida << iterr->twitter << ",";
 			flujoSalida << iterr->facebook << ",";
 			flujoSalida << iterr->gPlus << ",";
@@ -64,8 +64,8 @@ bool GestorDBFichero::guardar(const Agenda &a) {
 		//Lista de direcciones postales
 		int ultimo = 1;
 		flujoSalida << aux.getDireccionPostal().size() << ",";
-		for(list <direccionPostal>:: iterator iterd = aux.getDireccionPostal().begin(); iterd!=aux.getDireccionPostal().end();iterd++){
-
+		for (list <direccionPostal>:: iterator iterd = aux.getDireccionPostal().begin(); iterd!=aux.getDireccionPostal().end();iterd++)
+		{
 			flujoSalida << iterd->municipio << ",";
 			flujoSalida << iterd->provincia << ",";
 			flujoSalida << iterd->calle << ",";
