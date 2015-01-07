@@ -11,7 +11,6 @@
 #include <stdlib.h>	//Necesario para atoi()
 #include "Agenda.hpp"
 #include "GestorDBFichero.hpp"
-//#include "Funciones.hpp"
 
 #define MAX 50
 
@@ -24,7 +23,6 @@ bool GestorDBFichero::guardar(const Agenda &a) {
   string fichero;
   ofstream flujoSalida;
   list <Contacto> aux;
-  list <Contacto>:: iterator iter;
 
   aux = a.getContactos();
 
@@ -39,8 +37,9 @@ bool GestorDBFichero::guardar(const Agenda &a) {
 	flujoSalida.open(fichero.c_str, ios::out);
 
 	//Escribimos los contactos en el fichero
-	for(iter = aux.begin(); iter != aux.end(); iter++){
-	
+	for (  list <Contacto>:: iterator iter = aux.begin(); iter != aux.end(); iter++)
+	{
+		//Creo que estos serían iter y no aux
 		flujoSalida << aux.getNombre() << ",";
 		flujoSalida << aux.getApellido1() << ",";
 		flujoSalida << aux.getApellido2() << ",";
@@ -48,36 +47,32 @@ bool GestorDBFichero::guardar(const Agenda &a) {
 		flujoSalida << aux.getEmail() << ",";
 
 		//Lista de telefonos
-		list <string>:: iterator itert;
 		flujoSalida << aux.getTelefono().size() << ",";	//indicamos el numero de elementos
-		for(itert = aux.getTelefono().begin(); itert != aux.getTelefono().end(); itert++)
-
-			flujoSalida << *iter << ",";
+		for (list <string>:: iterator itert = aux.getTelefono().begin(); itert != aux.getTelefono().end(); itert++)
+			flujoSalida << *itert << ",";
 
 		//Lista de redes sociales
-		list <redSocial>:: iterator iterr;
 		flujoSalida << aux.getRedSocial().size() << ",";
-		for(iterr = aux.getRedSocial().begin(); iterr != aux.getRedSocial().end(); iterr++){
+		for(list <redSocial>:: iterator iterr = aux.getRedSocial().begin(); iterr != aux.getRedSocial().end(); iterr++){
 
-			flujoSalida << iter->twitter << ",";
-			flujoSalida << iter->facebook << ",";
-			flujoSalida << iter->gplus << ",";
-			flujoSalida << iter->url << ",";
+			flujoSalida << iterr->twitter << ",";
+			flujoSalida << iterr->facebook << ",";
+			flujoSalida << iterr->gPlus << ",";
+			flujoSalida << iterr->url << ",";
 		}
 
 		//Lista de direcciones postales
-		list <direccionPostal>:: iterator iterd;
 		int ultimo = 1;
 		flujoSalida << aux.getDireccionPostal().size() << ",";
-		for(iterr = aux.getDireccionPostal().begin(); iterr!=aux.getDireccionPostal().end();iterr++){
+		for(list <direccionPostal>:: iterator iterd = aux.getDireccionPostal().begin(); iterd!=aux.getDireccionPostal().end();iterd++){
 
-			flujoSalida << iter->municipio << ",";
-			flujoSalida << iter->provincia << ",";
-			flujoSalida << iter->calle << ",";
-			flujoSalida << iter->portal << ",";
-			flujoSalida << iter->piso << ",";
-			flujoSalida << iter->puerta << ",";
-			flujoSalida << iter->codigoPostal << ",";
+			flujoSalida << iterd->municipio << ",";
+			flujoSalida << iterd->provincia << ",";
+			flujoSalida << iterd->calle << ",";
+			flujoSalida << iterd->portal << ",";
+			flujoSalida << iterd->piso << ",";
+			flujoSalida << iterd->puerta << ",";
+			flujoSalida << iterd->codigoPostal << ",";
 		}
 
 		if(aux.esFavorito)
