@@ -26,13 +26,25 @@ GestorDBFichero::bool guardar(const Agenda &a){
   list <Contacto> aux;
   list <Contacto>:: iterator iter;
 
+
+	aux = a.getContactos();
+
+		//Si la lista esta vacia, no escribiremos nada en el fichero
+	if(aux.empty())
+		return false;
+
+
+
+
+
 	cout << "Introduzca el nombre del fichero donde se guardaran los contactos: "; 
 	cin >> fichero;
 
 		//Abrimos el fichero para escribir
 	flujoSalida.open(fichero.c_str, ios::out);
 
-	aux = a.getContactos();
+
+
 
 		//Escribimos los contactos en el fichero
 
@@ -87,7 +99,9 @@ GestorDBFichero::bool guardar(const Agenda &a){
 	}
 
 	//Cerramos el fichero
-	flujoSalida.close(); 
+	flujoSalida.close();
+
+  return true;
 }
 
 
@@ -120,12 +134,12 @@ GestorDBFichero::Agenda cargar(const string &fichero){
 		txt.getline(email, MAX, ',');
 		
 		//Leemos los telefonos
-		txt.getline(num_tel, 1, ',');		
+		txt.getline(num_tel, 1, ',');
 		cont = atoi(num_tel);
 		while(cont > 0){
 
 			txt.getline(telefono, MAX, ',');
-			tel.push_back(telefono);  //¿¿Se puede hacer un push_back de char en list string??
+			tel.push_back(new string(telefono));
 		}
 
 		txt.getline(num_red, 1, ',');		
@@ -138,10 +152,10 @@ GestorDBFichero::Agenda cargar(const string &fichero){
 			txt.getline(url, MAX, ',');
 
 
-			r.twitter = twitter;
-			r.facebook = facebook;
-			r.gplus = gplus;
-			r.url = url;
+			r.twitter = new string(twitter);
+			r.facebook = new string(facebook);
+			r.gplus = new string(gplus);
+			r.url = new string(url);
 
 			c.addRedSocial(r);
 		}
@@ -159,12 +173,12 @@ GestorDBFichero::Agenda cargar(const string &fichero){
 			txt.getline(codigo, MAX, ',');
 
 
-			dp.municipio = municipio;
-			dp.provincia = provincia;
-			dp.calle = calle;
-			dp.portal = portal;
+			dp.municipio = new string(municipio);
+			dp.provincia = new string(provincia);
+			dp.calle = new string(calle);
+			dp.portal = new string(portal);
 			dp.piso = atoi(piso);
-			dp.puerta = puerta;
+			dp.puerta = new string(puerta);
 			dp.codigoPostal = atoi(codigo);
 
 			c.addDireccionPostal(dp);
@@ -176,11 +190,11 @@ GestorDBFichero::Agenda cargar(const string &fichero){
 
 		//Ahora, a meterlo todo en el contcto wiiiiiii
 
-		c.setNombre(nombre);
-		c.setApellido1(apellido1);
-		c.setApellido2(apellido2);
-		c.setDNI(DNI);
-		c.setEmail(email);
+		c.setNombre(new string(nombre));
+		c.setApellido1(new string(apellido1));
+		c.setApellido2(new string(apellido2));
+		c.setDNI(new string(DNI));
+		c.setEmail(new string(email));
 		c.addTelefono(tel);
 
 		if(favorito == '1')

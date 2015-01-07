@@ -18,8 +18,8 @@ class GestorDBFichero : public GestorDB {
 
   public:
 
-	GestorDBFichero(){};
-	~GestorDBFichero(){};
+	GestorDBFichero(){};  //Constructor vacio
+	~GestorDBFichero(){};  //Falta hacer el destructor
 	
 	bool guardar(const Agenda &a);
 	Agenda cargar(const std::string &fichero);
