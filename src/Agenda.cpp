@@ -127,33 +127,24 @@ bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 
 void Agenda::actualizarFrecuentes(Contacto frecuente)
 {
-
 	if(_frecuentes.empty())
 		_frecuentes.push_back(frecuente);
 
-	
-  list <Contacto>::iterator iter;
-  int encontrado = 0;
+	list <Contacto>::iterator iter_aux;
+	int encontrado = 0;
 
-	for(iter = _frecuentes.begin(); iter != _frecuentes.end(); iter++){
-
-		if(iter->getDNI() == frecuente.getDNI()){
-
+	for (list <Contacto>::iterator iter = _frecuentes.begin(); iter != _frecuentes.end(); iter++) {
+		if(iter->getDNI() == frecuente.getDNI()) {
 			iter->buscado();  //frecuente++ en lista de frecuentes
-			encontrado = 1;
-			
-		  list <Contacto>::iterator iter_aux;
-
-			iter_aux = (iter-1);
-
+			encontrado = 1;		//Para que sirve encontrado?
+			iter_aux = iter--;
 			if(iter->getFrecuentes() > iter_aux->getFrecuentes())
 				Agenda::ordenaAgenda(_frecuentes);
-						
 		}
 	}
 
 	if(encontrado == 0)	//Si no esta en la lista, se añade
-		_frecuentes.push_back(contacto);
+		_frecuentes.push_back(frecuente);
 }
 
 } //Namespace Agenda

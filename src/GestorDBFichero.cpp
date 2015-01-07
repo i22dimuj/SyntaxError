@@ -5,49 +5,40 @@
  *      Author: i22caboc
  */
 
-
 #include <iostream>
 #include <fstream>
 #include <list>
 #include <stdlib.h>	//Necesario para atoi()
+#include "Agenda.hpp"
 #include "GestorDBFichero.hpp"
-#include "Funciones.hpp"
+//#include "Funciones.hpp"
 
 #define MAX 50
 
-namespace std;
+using namespace std;
+
 namespace agenda {
 
-
-GestorDBFichero::bool guardar(const Agenda &a){
+bool GestorDBFichero::guardar(const Agenda &a) {
 
   string fichero;
   ofstream flujoSalida;
   list <Contacto> aux;
   list <Contacto>:: iterator iter;
 
+  aux = a.getContactos();
 
-	aux = a.getContactos();
-
-		//Si la lista esta vacia, no escribiremos nada en el fichero
-	if(aux.empty())
+  //Si la lista esta vacia, no escribiremos nada en el fichero
+  if(aux.empty())
 		return false;
-
-
-
-
 
 	cout << "Introduzca el nombre del fichero donde se guardaran los contactos: "; 
 	cin >> fichero;
 
-		//Abrimos el fichero para escribir
+	//Abrimos el fichero para escribir
 	flujoSalida.open(fichero.c_str, ios::out);
 
-
-
-
-		//Escribimos los contactos en el fichero
-
+	//Escribimos los contactos en el fichero
 	for(iter = aux.begin(); iter != aux.end(); iter++){
 	
 		flujoSalida << aux.getNombre() << ",";
@@ -106,28 +97,26 @@ GestorDBFichero::bool guardar(const Agenda &a){
 
 
 
-GestorDBFichero::Agenda cargar(const string &fichero){
+Agenda GestorDBFichero::cargar(const string &fichero) {
 
-  Agenda a;
+	Agenda a = new Agenda();
 
-  char nombre[MAX], apellido1[MAX], apellido2[MAX], DNI[MAX], email[MAX], telefono[MAX],
-  favorito, busquedas[3], twitter[MAX], facebook[MAX], gplus[MAX], url[MAX], municipio[MAX],
-  provincia[MAX], calle[MAX], portal[MAX], piso[MAX], puerta[MAX], codigo[MAX];
-  char num_tel, num_red, num_dir;
+	char nombre[MAX], apellido1[MAX], apellido2[MAX], DNI[MAX], email[MAX], telefono[MAX],
+	favorito, busquedas[3], twitter[MAX], facebook[MAX], gplus[MAX], url[MAX], municipio[MAX],
+	provincia[MAX], calle[MAX], portal[MAX], piso[MAX], puerta[MAX], codigo[MAX];
+	char num_tel, num_red, num_dir;
 
-  int cont = 0;
-  list <string> tel;
-  redSocial r;
-  direccionPostal dp;
-  Contacto c("","","","","");	//Creamos un contacto "vacio"
-
+	int cont = 0;
+	list <string> tel;
+	redSocial r;
+	direccionPostal dp;
+	Contacto c;	//Creamos un contacto "vacio"
 
 	//Abrimos fichero en modo lectura
 	ifstream txt(fichero.c_str);
 
-
-	while(txt.getline(nombre,MAX,',')){
-
+	while (txt.getline(nombre,MAX,','))
+	{
 		txt.getline(apellido1, MAX, ',');
 		txt.getline(apellido2, MAX, ',');
 		txt.getline(DNI, MAX, ',');
@@ -136,25 +125,24 @@ GestorDBFichero::Agenda cargar(const string &fichero){
 		//Leemos los telefonos
 		txt.getline(num_tel, 1, ',');
 		cont = atoi(num_tel);
-		while(cont > 0){
-
+		while(cont > 0)
+		{
 			txt.getline(telefono, MAX, ',');
 			tel.push_back(new string(telefono));
 		}
 
 		txt.getline(num_red, 1, ',');		
 		cont = atoi(num_red);
-		while(cont > 0){
-
+		while(cont > 0)
+		{
 			txt.getline(twitter, MAX, ',');
 			txt.getline(facebook, MAX, ',');
 			txt.getline(gplus, MAX, ',');
 			txt.getline(url, MAX, ',');
 
-
 			r.twitter = new string(twitter);
 			r.facebook = new string(facebook);
-			r.gplus = new string(gplus);
+			r.gPlus = new string(gplus);
 			r.url = new string(url);
 
 			c.addRedSocial(r);
@@ -162,8 +150,8 @@ GestorDBFichero::Agenda cargar(const string &fichero){
 
 		txt.getline(num_dir, 1, ',');		
 		cont = atoi(num_dir);
-		while(cont > 0){
-
+		while (cont > 0)
+		{
 			txt.getline(municipio, MAX, ',');
 			txt.getline(provincia, MAX, ',');
 			txt.getline(calle, MAX, ',');
@@ -171,7 +159,6 @@ GestorDBFichero::Agenda cargar(const string &fichero){
 			txt.getline(piso, MAX, ',');
 			txt.getline(puerta, MAX, ',');
 			txt.getline(codigo, MAX, ',');
-
 
 			dp.municipio = new string(municipio);
 			dp.provincia = new string(provincia);
@@ -189,7 +176,6 @@ GestorDBFichero::Agenda cargar(const string &fichero){
 
 
 		//Ahora, a meterlo todo en el contcto wiiiiiii
-
 		c.setNombre(new string(nombre));
 		c.setApellido1(new string(apellido1));
 		c.setApellido2(new string(apellido2));
@@ -207,7 +193,7 @@ GestorDBFichero::Agenda cargar(const string &fichero){
 
 	} //Fin del while (crei que nunca terminaria)
 
-	txt.close();
+txt.close();
 
 
   return a;

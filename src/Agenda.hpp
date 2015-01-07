@@ -23,18 +23,18 @@ class Agenda {
 	public:
 		Agenda(GestorDB* g);
 		Agenda(Agenda &agenda);
-		Agenda(){};	//Constructor vacio
+		Agenda();	//Constructor vacio
 
 		std::string getFichero() {return fichero;};  //<----- Observadores añadidos a la fuerza
 		GestorDB* getGestorDB() {return _bd;};		//<----- Para constructor de copia
 		std::list <Contacto> getContactos() {return _contactos;};
 		std::list <Contacto> getFrecuentes() {return _frecuentes;};
 
-				//Modificadores para copiar objeto Agenda en clase Interfaz  ¿Necesario?
+		//Modificadores para copiar objeto Agenda en clase Interfaz  ¿Necesario?
 		void setFichero(std::string fich) {fichero = fich;};
-		void setGestorDB(GestorDB* bd) {_bd = bd};
-		void setContactos(std::list <Contacto> contactos) {_contactos = contactos};
-		void setFrecuentes(std::list <Contacto> frecuentes) {_frecuentes = frecuentes};
+		void setGestorDB(GestorDB* bd) {_bd = bd;};
+		void setContactos(std::list <Contacto> contactos) {_contactos = contactos;};
+		void setFrecuentes(std::list <Contacto> frecuentes) {_frecuentes = frecuentes;};
 
 
 		std::list <Contacto> buscar(std::string apellido1);

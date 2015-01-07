@@ -14,10 +14,10 @@ namespace agenda {
 Interfaz::Interfaz(Agenda &a){	//Coompletamos el paso de la agenda desde el main ----> ¿Otra forma?
 				//Similar a constructor de copia de Agenda
 
-	Agenda::_agenda.setFichero(a.getFichero());	//¿"Agenda::" se pone antes o despues del objeto?
-	Agenda::_agenda.setGestorDB(a.getGestorDB());
-	Agenda::_agenda.setContactos(a.getContactos());
-	Agenda::_agenda.setFrecuentes(a.getFrecuentes());
+	_agenda.setFichero(a.getFichero());	//¿"Agenda::" se pone antes o despues del objeto?
+	_agenda.setGestorDB(a.getGestorDB());
+	_agenda.setContactos(a.getContactos());
+	_agenda.setFrecuentes(a.getFrecuentes());
 }
 
 
@@ -41,16 +41,15 @@ int Interfaz::menuAgenda()
 
 	cin >> seleccion;
 
-	if (seleccion == 0)
+	if (seleccion == 0) {
 		return 0; //Le indicamos al main que salga
 
-	if ((seleccion < 0) || (seleccion > 8))
-	{
+	} else if ((seleccion < 0) || (seleccion > 8)) {
 		cout << "Seleccione una opcion valida (persione enter): " << endl;
 		getchar();
-	}
-	else
+	} else {
 		menuFuncion(seleccion);
+	}
 	return 1; //Le indicamos  al main que no salga
 }
 
@@ -62,13 +61,13 @@ bool Interfaz::menuFuncion(int opc)
 		string apellido;
 		cout << "Introduzca el apellido de la persona que quiere buscar: ";
 		cin << apellido;
-		imprimeContacto(seleccionaContacto(Agenda::buscar(apellido)));
+		imprimeContacto(seleccionaContacto(_agenda.buscar(apellido)));
 		break;
 
 	case 2: //Añadir contacto
 		Contacto contacto;
 		contacto = rellenarContacto();
-		Agenda::insertar(contacto);
+		_agenda.insertar(contacto);
 
 		break;
 
@@ -78,11 +77,11 @@ bool Interfaz::menuFuncion(int opc)
 
 		cout << "Introduzca el apellido de la persona que quiere modificar: ";
 		cin << apellido;
-		aux = seleccionaContacto(Agenda::buscar(apellido));
+		aux = seleccionaContacto(_agenda.buscar(apellido));
 		cout << "--------------------------" << endl;
 		aux2 = rellenarContacto();
 
-		Agenda::modificar(aux, aux2);
+		_agenda.modificar(aux, aux2);
 
 		break;
 
@@ -99,7 +98,7 @@ bool Interfaz::menuFuncion(int opc)
 		cout << "Introduzca el DNI de la persona que quiere borrar: ";
 		cin >> dni;
 
-		if (Agenda::borrar(dni))
+		if (_agenda.borrar(dni))
 			cout << "Borrado efectuado con exito" << endl;
 		else
 			cout << "No se ha podido borrar el contacto. Quizas el DNI introducino no exista." << endl;

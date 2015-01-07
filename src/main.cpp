@@ -9,11 +9,14 @@ using namespace agenda;
 
 int main(int argc, char**argv) {
 
-	GestorDBFichero* g = new GestorDBFichero("nombre.txt");
-	
-	Agenda a = new Agenda(g);
-
-	Interfaz i = new Interfaz(a);
+/*	COMENTADO PARA QUITAR FALLOS REDUNDANTES
+ *
+ * 	GestorDBFichero* g = new GestorDBFichero("nombre.txt");
+ *
+ * 	Agenda a = new Agenda(g);
+ *
+ * 	Interfaz i = new Interfaz(a);
+*/
 
 
 	return 0;

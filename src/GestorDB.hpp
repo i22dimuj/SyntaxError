@@ -21,6 +21,7 @@ public:
 
 	virtual bool guardar(const Agenda &a) = 0;
 	virtual Agenda cargar(const std::string &fichero) = 0;
+	virtual ~GestorDB() { std::cout << "Destructor de GestorDB" << std::endl;} //Para que no de warning
 };
 
 } /* namespace agenda */
