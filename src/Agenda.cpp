@@ -19,8 +19,10 @@ Agenda::Agenda(Agenda &agenda) {
 }
 
 bool Agenda::guardar() {
-	_bd->guardar(*this);
-	return true;
+	if(_bd->guardar(const *this))
+		return true;
+	else
+		return false;
 }
 
 bool Agenda::insertar(Contacto contacto) {
