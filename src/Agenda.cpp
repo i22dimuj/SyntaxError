@@ -19,7 +19,7 @@ Agenda::Agenda(Agenda &agenda) {
 }
 
 bool Agenda::guardar() {
-	_bd->guardar();
+	_bd->guardar(*this);
 	return true;
 }
 
@@ -138,7 +138,7 @@ void Agenda::actualizarFrecuentes(Contacto frecuente)
 			iter->buscado();  //frecuente++ en lista de frecuentes
 			encontrado = 1;		//Para que sirve encontrado?
 			iter_aux = iter--;
-			if(iter->getFrecuentes() > iter_aux->getFrecuentes())
+			if (iter->numeroBusquedas() > iter_aux->numeroBusquedas())
 				Agenda::ordenaAgenda(_frecuentes);
 		}
 	}
