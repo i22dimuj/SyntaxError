@@ -15,9 +15,6 @@
 #define MAX 50
 
 using namespace std;
-
-namespace agenda {
-
 bool GestorDBFichero::guardar(list<Contacto> aux) {
 
   //Si la agenda esta vacia, no escribiremos nada en el fichero
@@ -199,6 +196,3 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 
   return contactos;
 }
-
-
-} /* namespace agenda */

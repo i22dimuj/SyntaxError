@@ -5,8 +5,6 @@
 #include "Agenda.hpp"
 #include "Contacto.hpp"
 
-namespace agenda {
-
 class Interfaz {
 
 	private:
@@ -15,11 +13,10 @@ class Interfaz {
 		void imprimeContacto(Contacto contacto);
 
 	public:
-		/*
+		Interfaz() {};
 		Interfaz(Agenda &a);
-		*/
 		Contacto rellenarContacto();
-		int menuAgenda();
+		void menuAgenda();
 		bool menuFuncion(int opc); //Devuelve FALSE si no se quiere salir, si se quiere salir 						     devuelve TRUE
 		void imprimirAgenda();
 		void verFavoritos();
@@ -28,6 +25,4 @@ class Interfaz {
 		void imprimeRedSocial(Contacto contacto);
 
 };
-
-}
 #endif

@@ -8,24 +8,20 @@
 #include "Estructuras.hpp"
 
 using namespace std;
-
-namespace agenda {
-
 //Completamos el paso de la agenda desde el main ----> ¿Otra forma? //Similar a constructor de copia de Agenda
 
-/*
 Interfaz::Interfaz(Agenda &a) {
 	_agenda.setFichero(a.getFichero());
 	_agenda.setGestorDB(a.getGestorDB());
 	_agenda.setContactos(a.getContactos());
 	_agenda.setFrecuentes(a.getFrecuentes());
 }
-*/
 
-int Interfaz::menuAgenda()
+void Interfaz::menuAgenda()
 {
 	int seleccion;
 
+	do {
 	system("clear");
 	cout << "----- Agenda -----" << endl << endl;
 	cout << "Menu:" << endl;
@@ -43,7 +39,8 @@ int Interfaz::menuAgenda()
 	cin >> seleccion;
 
 	if (seleccion == 0) {
-		return 0; //Le indicamos al main que salga
+		cout << "ME ZARGO IO" << endl;
+		return; //Le indicamos al main que salga
 
 	} else if ((seleccion < 0) || (seleccion > 8)) {
 		cout << "Seleccione una opcion valida (persione enter): " << endl;
@@ -51,7 +48,7 @@ int Interfaz::menuAgenda()
 	} else {
 		menuFuncion(seleccion);
 	}
-	return 1; //Le indicamos  al main que no salga
+	} while (true);
 }
 
 bool Interfaz::menuFuncion(int opc)
@@ -274,5 +271,3 @@ void Interfaz::imprimeRedSocial(Contacto contacto){
 		cout << "---------------------------" << endl;
 	}
 }
-
-} //Namespace Agenda

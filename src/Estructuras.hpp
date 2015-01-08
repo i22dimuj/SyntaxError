@@ -4,8 +4,6 @@
 #include <string>
 #include <iostream>
 
-namespace agenda {
-
 struct redSocial {
 	std::string twitter;
 	std::string facebook;
@@ -24,6 +22,4 @@ struct direccionPostal {
 	int codigoPostal;
 };
 
-
-}
 #endif

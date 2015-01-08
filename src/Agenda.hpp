@@ -8,8 +8,6 @@
 #include "Contacto.hpp"
 #include "GestorDB.hpp"
 
-namespace agenda {
-
 class Agenda {
 
 	private:
@@ -22,8 +20,8 @@ class Agenda {
 
 	public:
 		Agenda(GestorDB* g);
-		//Agenda(Agenda &agenda);
-		//Agenda() {};	//Constructor vacio
+		Agenda(Agenda &agenda);
+		Agenda() {};	//Constructor vacio
 
 		std::string getFichero() {return fichero;};  //<----- Observadores añadidos a la fuerza
 		GestorDB* getGestorDB() {return _bd;};		//<----- Para constructor de copia
@@ -45,5 +43,4 @@ class Agenda {
 
 		void actualizarFrecuentes(Contacto frecuente);
 };
-}
 #endif

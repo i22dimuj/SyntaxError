@@ -5,20 +5,18 @@
 #include "Agenda.hpp"
 
 using namespace std;
-namespace agenda {
 
 Agenda::Agenda(GestorDB* g) {
 	_bd = g;
 }
 
-/*
 Agenda::Agenda(Agenda &agenda) {
 
 	fichero = agenda.getFichero();
 	_bd = agenda.getGestorDB();
 	_contactos = agenda.getContactos();
 	_frecuentes = agenda.getFrecuentes();
-}*/
+}
 
 bool Agenda::guardar() {
 	if(_bd->guardar(_contactos))
@@ -139,5 +137,3 @@ void Agenda::actualizarFrecuentes (Contacto frecuente)
 		_frecuentes.push_back(frecuente);
 	*/
 }
-
-} //Namespace Agenda

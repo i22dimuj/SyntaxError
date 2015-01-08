@@ -7,22 +7,18 @@
 #include "GestorDBFichero.hpp"
 
 using namespace std;
-using namespace agenda;
-
 
 int main(int argc, char**argv) {
-
-	cout << "Hola mundo." << endl;
 
 	//COMENTADO PARA QUITAR FALLOS REDUNDANTES
 
 	string nombre = "nombre.txt";
-
 	GestorDBFichero *g = new GestorDBFichero(nombre);
-
-
 	Agenda a(g);
-	Interfaz i();
+
+	Interfaz i(a);
+
+	i.menuAgenda();
 
 	//SOBRECARGAR OPERADORES = EN AGENDA
 

@@ -4,9 +4,6 @@
 
 using namespace std;
 
-namespace agenda {
-
-
 Contacto::Contacto() {
 	_favorito = false;
 	_frecuente = 0;
@@ -20,6 +17,4 @@ Contacto::Contacto(string dni, string nombre, string apellido1, string apellido2
 	_telefono.push_back(telefono);
 	_favorito = false;
 	_frecuente = 0;
-}
-
 }

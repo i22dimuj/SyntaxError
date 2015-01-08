@@ -12,9 +12,6 @@
 #include <list>
 #include "Agenda.hpp"
 #include "GestorDB.hpp"
-
-namespace agenda {
-
 class GestorDBFichero : public GestorDB {
 
 private:
@@ -28,6 +25,4 @@ private:
 	bool guardar(std::list<Contacto>);
 	std::list<Contacto> cargar(const std::string &fichero);
 };
-
-} /* namespace agenda */
 #endif /* GESTORDBFICHERO_HPP_ */

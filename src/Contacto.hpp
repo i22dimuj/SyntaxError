@@ -6,7 +6,6 @@
 #include <list>
 #include "Estructuras.hpp"
 
-namespace agenda {
 
 class Contacto {
 
@@ -56,6 +55,5 @@ class Contacto {
 		void buscado() {_frecuente++;};
 		void cambiaFavorito() { _favorito ? _favorito = false : _favorito = true;}; //if(true) _fav= false; else _fav = true;
 };
-}
 #endif
 
