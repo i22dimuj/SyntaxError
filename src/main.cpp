@@ -9,6 +9,8 @@ using namespace agenda;
 
 int main(int argc, char**argv) {
 
+	cout << "Hola mundo." << endl;
+
 /*	COMENTADO PARA QUITAR FALLOS REDUNDANTES
  *
  * 	GestorDBFichero* g = new GestorDBFichero("nombre.txt");
@@ -17,7 +19,6 @@ int main(int argc, char**argv) {
  *
  * 	Interfaz i = new Interfaz(a);
 */
-
 
 	return 0;
 }

@@ -12,7 +12,7 @@ using namespace std;
 namespace agenda {
 
 Interfaz::Interfaz(Agenda &a){	//Coompletamos el paso de la agenda desde el main ----> ¿Otra forma?
-				//Similar a constructor de copia de Agenda
+								//Similar a constructor de copia de Agenda
 
 	_agenda.setFichero(a.getFichero());	//¿"Agenda::" se pone antes o despues del objeto?
 	_agenda.setGestorDB(a.getGestorDB());

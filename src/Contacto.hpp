@@ -50,6 +50,7 @@ class Contacto {
 
 		void addTelefono(std::string telefono) {_telefono.push_back(telefono);};
 		void addTelefono(std::list <std::string> telefonos) {_telefono = telefonos;}; //Sobrecargado para poder utilizarlo en modificarContato()
+		void removeTelefono() {_telefono.clear();};
 		void addDireccionPostal(direccionPostal direccion) {_direccionPostal.push_back(direccion);};
 		void addRedSocial(redSocial red) {_redSocial.push_back(red);};
 		void buscado() {_frecuente++;};

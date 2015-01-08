@@ -20,15 +20,15 @@ namespace agenda {
 
 bool GestorDBFichero::guardar(const Agenda &a) {
 
+  //Si la agenda esta vacia, no escribiremos nada en el fichero
+  if(not a.getContactos())
+		return false;
+
   string fichero;
   ofstream flujoSalida;
   list <Contacto> aux;
 
   aux = a.getContactos();
-
-  //Si la lista esta vacia, no escribiremos nada en el fichero
-  if(aux.empty())
-		return false;
 
 	cout << "Introduzca el nombre del fichero donde se guardaran los contactos: "; 
 	cin >> fichero;
@@ -37,7 +37,7 @@ bool GestorDBFichero::guardar(const Agenda &a) {
 	flujoSalida.open(fichero.c_str, ios::out);
 
 	//Escribimos los contactos en el fichero
-	for (  list <Contacto>:: iterator iter = aux.begin(); iter != aux.end(); iter++)
+	for (list <Contacto>:: iterator iter = aux.begin(); iter != aux.end(); iter++)
 	{
 		//Creo que estos serían iter y no aux
 		flujoSalida << aux.getNombre() << ",";
@@ -75,7 +75,7 @@ bool GestorDBFichero::guardar(const Agenda &a) {
 			flujoSalida << iterd->codigoPostal << ",";
 		}
 
-		if(aux.esFavorito)
+		if(aux.esFavorito())
 			flujoSalida << 1 << ",";
 		else
 			flujoSalida << 0 << ",";

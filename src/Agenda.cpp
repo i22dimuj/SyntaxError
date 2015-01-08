@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <algorithm> //Para buscar en la lista
 #include "Contacto.hpp"
 #include "Agenda.hpp"
 
@@ -19,23 +20,28 @@ Agenda::Agenda(Agenda &agenda) {
 }
 
 bool Agenda::guardar() {
-	if(_bd->guardar(const *this))
+	if(bd->guardar(*this))
 		return true;
 	else
 		return false;
+	return false;
 }
 
 bool Agenda::insertar(Contacto contacto) {
-	// .push_back devuelve void, No se puede usar en un if()
-	/*
-	 if(_contactos.push_back(contacto))  //Hacer el sort dentro del if
-	{
-		ordenaAgenda(_contactos); //Ordenar por apellido
+
+	//Si la lista esta vacia se inserta el elemento
+	if(_contactos.empty()) {
+		_contactos.push_back(contacto);
+		return true;
+	//Si el contacto no esta en la lista la funcion find devuelve la última posicion
+	} else if( _contactos.end() not find(_contactos.begin(), _contactos.end(), contacto)) {										//Hacer el sort dentro del if
+		_contactos.push_back(contacto);
+		ordenaAgenda(_contactos); 				//Ordenar por apellido
 		return true;
 	} else {
 		return false;
 	}
-	 */
+
 
 	_contactos.push_back(contacto);
 	ordenaAgenda(_contactos);
@@ -99,27 +105,21 @@ void ordenaAgenda(list <Contacto> lista)
 bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 {
 	if (contactoNuevo.getNombre() == "")
-	{
 		contactoNuevo.setNombre(contactoViejo.getNombre());
-	}
 	if (contactoNuevo.getApellido1() == "")
-	{
 		contactoNuevo.setApellido1(contactoViejo.getApellido1());
-	}
 	if (contactoNuevo.getApellido2() == "")
-	{
 		contactoNuevo.setApellido2(contactoViejo.getApellido2());
-	}
 	if (contactoNuevo.getDNI() == "")
-	{
 		contactoNuevo.setDNI(contactoViejo.getDNI());
-	}
-	/* Hay que hacerlo de otra forma
-	if (contactoNuevo.getTelefono() == "")
-	{
+
+	//Elimina la lista anterior de telefonos, se sustituye por la nueva  ???
+	if (contactoNuevo.getTelefono() == "") {
+		contactoNuevo.removeTelefono();
 		contactoNuevo.addTelefono(contactoViejo.getTelefono());
 	}
-	*/
+
+	//Estas dos no serían con this. ???
 	borrar(contactoViejo.getDNI());
 	insertar(contactoNuevo);
 
