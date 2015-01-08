@@ -27,20 +27,20 @@ bool Agenda::guardar() {
 }
 bool Agenda::insertar(Contacto contacto) {
 
-#if 0 // ARREGLAR
+	// ARREGLAR
 	//Si la lista esta vacia se inserta el elemento
 	if(_contactos.empty()) {
 		_contactos.push_back(contacto);
 		return true;
 	//Si el contacto no esta en la lista la funcion find devuelve la última posicion
-	} else if( _contactos.end() != find(_contactos.begin(), _contactos.end(), contacto)) {	//Hacer el sort dentro del if
+	} else if(!existeDNI(contacto.getDNI())) {	//Hacer el sort dentro del if
 		_contactos.push_back(contacto);
 		ordenaAgenda(_contactos); 				//Ordenar por apellido
 		return true;
 	} else {
 		return false;
 	}
-#endif
+
 	return true; // Cambiar
 }
 
@@ -74,14 +74,14 @@ bool Agenda::borrar(string dni) {
 	return false;
 }
 
-bool comparaContactos(Contacto &a, Contacto &b)
+bool Agenda::comparaContactos(const Contacto &a, const Contacto &b)
 {
 	return a.getApellido1() < b.getApellido1();
 }
 
-void ordenaAgenda(list <Contacto> lista)
+void Agenda::ordenaAgenda(list <Contacto> lista)
 {
-	lista.sort(comparaContactos);
+	//lista.sort(comparaContactos); No Funka :'(
 }
 
 //Se llama con un contacto ya relleno y se iguala al viejo
@@ -136,4 +136,17 @@ void Agenda::actualizarFrecuentes (Contacto frecuente)
 	if(encontrado == 0)	//Si no esta en la lista, se añade
 		_frecuentes.push_back(frecuente);
 	*/
+}
+
+bool Agenda::existeDNI(string DNI)
+{
+	list <Contacto>::iterator iter;
+
+	for (iter = _contactos.begin(); iter != _contactos.end(); iter++)
+	{
+		if (iter->getDNI() == DNI)
+			return true;
+	}
+	return false;
+
 }

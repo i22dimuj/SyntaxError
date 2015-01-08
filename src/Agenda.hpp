@@ -40,7 +40,7 @@ class Agenda {
 		bool borrar(std::string dni);
 		bool modificar(Contacto contactoViejo, Contacto contactoNuevo);
 		bool guardar(); //Copia de seguridad ¿?
-
+		bool existeDNI(std::string DNI);
 		void actualizarFrecuentes(Contacto frecuente);
 };
 #endif

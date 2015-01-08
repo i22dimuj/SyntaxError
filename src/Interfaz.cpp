@@ -66,6 +66,10 @@ bool Interfaz::menuFuncion(int opc)
 		case 2: //Añadir contacto
 			aux = rellenarContacto();
 			_agenda.insertar(aux);
+			cout << "Contacto inserado correctamente." << endl;
+			cout << "Pulse enter para continuar" << endl;
+			getchar();
+			getchar();
 			break;
 
 		case 3: //Modificar contacto
@@ -81,6 +85,9 @@ bool Interfaz::menuFuncion(int opc)
 
 		case 4: //Imprimir Agenda
 			imprimirAgenda();
+			cout << "Pulse enter para continuar" << endl;
+			getchar();
+			getchar();
 			break;
 
 		case 5: //Copia de seguridad
@@ -126,19 +133,34 @@ Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos)
 	int i = 0, seleccion;
 
 	system("clear");
-
-	for (iter = listaContactos.begin(); iter != listaContactos.end(); iter++)
+	if (listaContactos.empty())
 	{
-		cout << i << ") " << iter->getNombre() << " " << iter->getApellido1() << " " << iter->getApellido2() << endl;
-		i++;
+		cout << "No se ha encontrado el Contacto en la agenda" << endl;
+		exit(1);
 	}
-	cout << endl << "Seleccione el contacto deseado: " << endl;
-	cin >> seleccion;
 
-	iter = listaContactos.begin();
-	advance(iter, seleccion);
+	else if (listaContactos.size() == 1)
+	{
+		iter = listaContactos.begin();
+		return *iter;
+	}
 
-	return *iter;
+	else
+	{
+		for (iter = listaContactos.begin(); iter != listaContactos.end(); iter++)
+		{
+			cout << i << ") " << iter->getNombre() << " " << iter->getApellido1() << " " << iter->getApellido2() << endl;
+			i++;
+		}
+		cout << endl << "Seleccione el contacto deseado: " << endl;
+		cin >> seleccion;
+
+		iter = listaContactos.begin();
+		advance(iter, seleccion);
+
+		return *iter;
+	}
+
 
 }
 
@@ -151,7 +173,6 @@ void Interfaz::imprimeContacto(Contacto contacto)
 	//Iterador para direcciones postales
 	list <direccionPostal>::iterator iterd;
 
-	system("clear");
 	cout << "Nombre: " << contacto.getNombre() << endl;
 	cout << "Apellidos: " << contacto.getApellido1() << " " << contacto.getApellido2() << endl;
 	cout << "DNI: " << contacto.getDNI() << endl;

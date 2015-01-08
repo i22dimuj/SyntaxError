@@ -28,11 +28,11 @@ class Contacto {
 		Contacto(std::string dni, std::string nombre, std::string apellido1, std::string apellido2, std::string telefono);
 
 		//Observadores
-		std::string getNombre() {return _nombre;};
-		std::string getApellido1() {return _apellido1;};
-		std::string getApellido2() {return _apellido2;};
-		std::string getDNI() {return _dni;};
-		std::string getEmail() {return _email;};
+		std::string getNombre() const {return _nombre;};
+		std::string getApellido1() const {return _apellido1;};
+		std::string getApellido2() const {return _apellido2;};
+		std::string getDNI() const {return _dni;};
+		std::string getEmail() const {return _email;};
 		std::list<std::string> getTelefono() {return _telefono;};
 		std::list<redSocial> getRedSocial() {return _redSocial;};
 		std::list<direccionPostal> getDireccionPostal() {return _direccionPostal;};
