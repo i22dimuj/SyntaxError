@@ -166,22 +166,13 @@ Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos)
 
 void Interfaz::imprimeContacto(Contacto contacto)
 {
-	//Iterador para telefonos
-	list <string>::iterator itert;
-	//Iterador para redes sociales
-	list <redSocial>::iterator iterr;
-	//Iterador para direcciones postales
-	list <direccionPostal>::iterator iterd;
-
 	cout << "Nombre: " << contacto.getNombre() << endl;
 	cout << "Apellidos: " << contacto.getApellido1() << " " << contacto.getApellido2() << endl;
 	cout << "DNI: " << contacto.getDNI() << endl;
 	cout << "e-mail: " << contacto.getEmail() << endl;
 
 	cout << "Telefono/s: " << endl;
-	for(itert = contacto.getTelefono().begin(); itert != contacto.getTelefono().end(); itert++)	
-		cout << "	" << *itert << endl;
-	
+	imprimeTelefono(contacto);
 	imprimeRedSocial(contacto);
 	imprimeDireccionPostal(contacto);
 
@@ -260,18 +251,20 @@ void Interfaz::imprimeDireccionPostal(Contacto contacto){
 	list <direccionPostal>::iterator iter;
 
 	listaDir = contacto.getDireccionPostal();
-
-	for (iter = listaDir.begin(); iter != listaDir.end(); iter++)
+	if (listaDir.empty())
 	{
-		cout << "-----------------------------" << endl;
-		cout << "Municipio: " << iter->municipio << endl;
-		cout << "Provincia: " << iter->provincia << endl;
-		cout << "Calle: " << iter->calle << endl;
-		cout << "Portal: " << iter->portal << endl;
-		cout << "Piso : " << iter->piso << endl;
-		cout << "Puerta: " << iter->puerta << endl;
-		cout << "Codigo Postal : " << iter->codigoPostal << endl;
-		cout << "----------------------------" << endl;
+		for (iter = listaDir.begin(); iter != listaDir.end(); iter++)
+		{
+			cout << "-----------------------------" << endl;
+			cout << "Municipio: " << iter->municipio << endl;
+			cout << "Provincia: " << iter->provincia << endl;
+			cout << "Calle: " << iter->calle << endl;
+			cout << "Portal: " << iter->portal << endl;
+			cout << "Piso : " << iter->piso << endl;
+			cout << "Puerta: " << iter->puerta << endl;
+			cout << "Codigo Postal : " << iter->codigoPostal << endl;
+			cout << "----------------------------" << endl;
+		}
 	}
 
 }
@@ -281,14 +274,33 @@ void Interfaz::imprimeRedSocial(Contacto contacto){
 	list <redSocial>::iterator iter;
 
 	listaRed = contacto.getRedSocial();
-
-	for (iter = listaRed.begin(); iter != listaRed.end(); iter++)
+	if (!listaRed.empty())
 	{
-		cout << "---------------------------" << endl;
-		cout << "twitter: " << iter->twitter << endl;
-		cout << "facebook: " << iter->facebook << endl;
-		cout << "gPlus: " << iter->gPlus << endl;
-		cout << "url: " << iter->url << endl;
-		cout << "---------------------------" << endl;
+		for (iter = listaRed.begin(); iter != listaRed.end(); iter++)
+		{
+			cout << "---------------------------" << endl;
+			cout << "twitter: " << iter->twitter << endl;
+			cout << "facebook: " << iter->facebook << endl;
+			cout << "gPlus: " << iter->gPlus << endl;
+			cout << "url: " << iter->url << endl;
+			cout << "---------------------------" << endl;
+		}
+	}
+}
+void Interfaz::imprimeTelefono(Contacto contacto)
+{
+	list <string>::iterator iter;
+	if(contacto.getTelefono().size() == 1)
+	{
+		iter = contacto.getTelefono().begin();
+		cout << "   " << *iter << endl;
+	}
+
+	else
+	{
+		for(iter = contacto.getTelefono().begin(); iter != contacto.getTelefono().end(); iter++)
+		{
+			cout << "	" << *iter << endl;
+		}
 	}
 }

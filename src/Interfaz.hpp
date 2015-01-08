@@ -23,6 +23,7 @@ class Interfaz {
 		void verFrecuentes();
 		void imprimeDireccionPostal(Contacto contacto);
 		void imprimeRedSocial(Contacto contacto);
+		void imprimeTelefono(Contacto contacto);
 
 };
 #endif
