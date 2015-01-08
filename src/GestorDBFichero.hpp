@@ -9,6 +9,7 @@
 #define GESTORDBFICHERO_HPP_
 
 #include <string>
+#include <list>
 #include "Agenda.hpp"
 #include "GestorDB.hpp"
 
@@ -16,13 +17,16 @@ namespace agenda {
 
 class GestorDBFichero : public GestorDB {
 
-  public:
+private:
+	std::string _fichero;
 
+
+  public:
 	GestorDBFichero(){};  //Constructor vacio
+	GestorDBFichero(std::string fichero) {_fichero = fichero;};
 	~GestorDBFichero(){};  //Falta hacer el destructor
-	
-	bool guardar(const Agenda &a);
-	Agenda cargar(const std::string &fichero);
+	bool guardar(std::list<Contacto>);
+	std::list<Contacto> cargar(const std::string &fichero);
 };
 
 } /* namespace agenda */

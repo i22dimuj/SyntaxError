@@ -3,29 +3,30 @@
 #include <cstdio>
 #include <string>
 #include "Interfaz.hpp"
-#include "Agenda.hpp"
-#include "Contacto.hpp"
+//#include "Agenda.hpp"
+//#include "Contacto.hpp"
 #include "Estructuras.hpp"
 
 using namespace std;
 
 namespace agenda {
 
-Interfaz::Interfaz(Agenda &a){	//Coompletamos el paso de la agenda desde el main ----> ¿Otra forma?
-								//Similar a constructor de copia de Agenda
+//Completamos el paso de la agenda desde el main ----> ¿Otra forma? //Similar a constructor de copia de Agenda
 
-	_agenda.setFichero(a.getFichero());	//¿"Agenda::" se pone antes o despues del objeto?
+/*
+Interfaz::Interfaz(Agenda &a) {
+	_agenda.setFichero(a.getFichero());
 	_agenda.setGestorDB(a.getGestorDB());
 	_agenda.setContactos(a.getContactos());
 	_agenda.setFrecuentes(a.getFrecuentes());
 }
-
+*/
 
 int Interfaz::menuAgenda()
 {
-	int salir = 1, seleccion;
+	int seleccion;
 
-	system("cls");
+	system("clear");
 	cout << "----- Agenda -----" << endl << endl;
 	cout << "Menu:" << endl;
 	cout << "1) Buscar contacto" << endl;
@@ -55,73 +56,69 @@ int Interfaz::menuAgenda()
 
 bool Interfaz::menuFuncion(int opc)
 {
-	switch(opc)
-	{
-	case 1: //Buscar contacto
-		string apellido;
-		cout << "Introduzca el apellido de la persona que quiere buscar: ";
-		cin << apellido;
-		imprimeContacto(seleccionaContacto(_agenda.buscar(apellido)));
+	string dni, apellido;
+	Contacto aux, aux2;
+
+	switch(opc) {
+		case 1: //Buscar contacto
+			cout << "Introduzca el apellido de la persona que quiere buscar: ";
+			cin >> apellido;
+			imprimeContacto(seleccionaContacto(_agenda.buscar(apellido)));
 		break;
 
-	case 2: //Añadir contacto
-		Contacto contacto;
-		contacto = rellenarContacto();
-		_agenda.insertar(contacto);
+		case 2: //Añadir contacto
+			aux = rellenarContacto();
+			_agenda.insertar(aux);
+			break;
 
-		break;
+		case 3: //Modificar contacto
+			cout << "Introduzca el apellido de la persona que quiere modificar: ";
+			cin >> apellido;
+			aux = seleccionaContacto(_agenda.buscar(apellido));
+			cout << "--------------------------" << endl;
+			aux2 = rellenarContacto();
 
-	case 3: //Modificar contacto
-		string apellido;
-		Contacto aux, aux2;
+			_agenda.modificar(aux, aux2);
 
-		cout << "Introduzca el apellido de la persona que quiere modificar: ";
-		cin << apellido;
-		aux = seleccionaContacto(_agenda.buscar(apellido));
-		cout << "--------------------------" << endl;
-		aux2 = rellenarContacto();
+			break;
 
-		_agenda.modificar(aux, aux2);
+		case 4: //Imprimir Agenda
+			imprimirAgenda();
+			break;
 
-		break;
+		case 5: //Copia de seguridad
 
-	case 4: //Imprimir Agenda
-		imprimirAgenda();
-		break;
+			break;
 
-	case 5: //Copia de seguridad
+		case 6: //Borrar contacto
+			cout << "Introduzca el DNI de la persona que quiere borrar: ";
+			cin >> dni;
 
-		break;
+			if (_agenda.borrar(dni))
+				cout << "Borrado efectuado con exito" << endl;
+			else
+				cout << "No se ha podido borrar el contacto. Quizas el DNI introducino no exista." << endl;
 
-	case 6: //Borrar contacto
-		string dni;
-		cout << "Introduzca el DNI de la persona que quiere borrar: ";
-		cin >> dni;
+			cout << "Pulse enter para continuar" << endl;
+			getchar();
 
-		if (_agenda.borrar(dni))
-			cout << "Borrado efectuado con exito" << endl;
-		else
-			cout << "No se ha podido borrar el contacto. Quizas el DNI introducino no exista." << endl;
+			break;
 
-		cout << "Pulse enter para continuar" << endl;
-		getchar();
+		case 7: //Mostrar frecuentes
+			verFrecuentes();
+			break;
 
-		break;
+		case 8: //Mostrar favoritos
+			verFavoritos();
+			break;
 
-	case 7: //Mostrar frecuentes
-		verFrecuentes();
-		break;
+		case 0: //Salir
+			return false;
+			break;
 
-	case 8: //Mostrar favoritos
-		verFavoritos();
-		break;
-
-	case 0: //Salir
-		return false;
-		break;
-
-	default:
-		cout << "Ha habido un problema en menuFunion" << cout;
+		default:
+			cout << "Ha habido un problema en menuFunion" << cout;
+			break;
 	}
 	return true;
 }
@@ -175,7 +172,7 @@ void Interfaz::imprimeContacto(Contacto contacto)
 
 Contacto Interfaz::rellenarContacto() {
 
-	Contacto contacto = new Contacto;
+	Contacto contacto;
 	string dni, nombre, apellido1, apellido2, telefono;
 
 	cout<<"\nIntroduce el nombre del nuevo Contacto: ";
@@ -203,7 +200,7 @@ void Interfaz::imprimirAgenda()
 	list <Contacto> aux;
 	list <Contacto>::iterator iter;
 
-	aux = _agenda.Agenda::getContactos();
+	aux = _agenda.getContactos();
 
 	system("clear");
 
@@ -216,34 +213,20 @@ void Interfaz::imprimirAgenda()
 }
 void Interfaz::verFavoritos()
 {
-
-	list <Contacto> aux;
-	list <Contacto>::iterator iter;
-
-	aux = _agenda.Agenda::getContactos();
-	
-
+	list <Contacto> aux = _agenda.getContactos();
 	system("clear");
-
-	for (iter = aux.begin(); iter != aux.end(); iter++)
-	{
-		if(iter->esFavorito()){
-
+	for (list <Contacto>::iterator iter = aux.begin(); iter != aux.end(); iter++) {
+		if(iter->esFavorito())
 			imprimeContacto(*iter);
-		}
-		
 	}
-
-
-
 }
+
 void Interfaz::verFrecuentes()
 {
 
 	list <Contacto> aux;
 	list <Contacto>::iterator iter;
 
-	aux = _agenda.Agenda::getFrecuentes();
 	
 
 	system("clear");

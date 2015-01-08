@@ -18,34 +18,35 @@ using namespace std;
 
 namespace agenda {
 
-bool GestorDBFichero::guardar(const Agenda &a) {
+bool GestorDBFichero::guardar(list<Contacto> aux) {
 
   //Si la agenda esta vacia, no escribiremos nada en el fichero
+	/*
   if(not a.getContactos())
 		return false;
+		CAMBIAR POR aux.empty();
+		*/
 
   string fichero;
   ofstream flujoSalida;
-  list <Contacto> aux;
-
-  aux = a.getContactos();
 
 	cout << "Introduzca el nombre del fichero donde se guardaran los contactos: "; 
 	cin >> fichero;
 
 	//Abrimos el fichero para escribir
-	flujoSalida.open(fichero.c_str, ios::out);
+	flujoSalida.open(fichero.c_str(), ios::out);
 
 	//Escribimos los contactos en el fichero
 	for (list <Contacto>:: iterator iter = aux.begin(); iter != aux.end(); iter++)
 	{
 		//Creo que estos serían iter y no aux
-		flujoSalida << aux.getNombre() << ",";
-		flujoSalida << aux.getApellido1() << ",";
-		flujoSalida << aux.getApellido2() << ",";
-		flujoSalida << aux.getDNI() << ",";
-		flujoSalida << aux.getEmail() << ",";
+		flujoSalida << iter->getNombre() << ",";
+		flujoSalida << iter->getApellido1() << ",";
+		flujoSalida << iter->getApellido2() << ",";
+		flujoSalida << iter->getDNI() << ",";
+		flujoSalida << iter->getEmail() << ",";
 
+#if 0 // ARREGLAR
 		//Lista de telefonos
 		flujoSalida << aux.getTelefono().size() << ",";	//indicamos el numero de elementos
 		for (list <string>:: iterator itert = aux.getTelefono().begin(); itert != aux.getTelefono().end(); itert++)
@@ -82,6 +83,7 @@ bool GestorDBFichero::guardar(const Agenda &a) {
 
 		flujoSalida << aux.numeroBusquedas() << "\n";
 		//Fin de la linea
+#endif
 	}
 
 	//Cerramos el fichero
@@ -92,14 +94,17 @@ bool GestorDBFichero::guardar(const Agenda &a) {
 
 
 
-Agenda GestorDBFichero::cargar(const string &fichero) {
+list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 
-	Agenda a = new Agenda();
+	/*Agenda a = new Agenda();*/
+	list<Contacto> contactos;
+#if 0
 
 	char nombre[MAX], apellido1[MAX], apellido2[MAX], DNI[MAX], email[MAX], telefono[MAX],
 	favorito, busquedas[3], twitter[MAX], facebook[MAX], gplus[MAX], url[MAX], municipio[MAX],
 	provincia[MAX], calle[MAX], portal[MAX], piso[MAX], puerta[MAX], codigo[MAX];
 	char num_tel, num_red, num_dir;
+
 
 	int cont = 0;
 	list <string> tel;
@@ -108,7 +113,7 @@ Agenda GestorDBFichero::cargar(const string &fichero) {
 	Contacto c;	//Creamos un contacto "vacio"
 
 	//Abrimos fichero en modo lectura
-	ifstream txt(fichero.c_str);
+	ifstream txt(fichero.c_str());
 
 	while (txt.getline(nombre,MAX,','))
 	{
@@ -116,7 +121,6 @@ Agenda GestorDBFichero::cargar(const string &fichero) {
 		txt.getline(apellido2, MAX, ',');
 		txt.getline(DNI, MAX, ',');
 		txt.getline(email, MAX, ',');
-		
 		//Leemos los telefonos
 		txt.getline(num_tel, 1, ',');
 		cont = atoi(num_tel);
@@ -141,6 +145,7 @@ Agenda GestorDBFichero::cargar(const string &fichero) {
 			r.url = new string(url);
 
 			c.addRedSocial(r);
+			cont--;
 		}
 
 		txt.getline(num_dir, 1, ',');		
@@ -184,14 +189,15 @@ Agenda GestorDBFichero::cargar(const string &fichero) {
 		c.setFrecuente(atoi(busquedas));
 
 		//Insertamos el contacto en la agenda	
-		a.insertar(c);
+		contactos.push_back(c);
 
 	} //Fin del while (crei que nunca terminaria)
 
-txt.close();
+	txt.close();
+#endif
 
 
-  return a;
+  return contactos;
 }
 
 

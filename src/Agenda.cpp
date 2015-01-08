@@ -11,46 +11,43 @@ Agenda::Agenda(GestorDB* g) {
 	_bd = g;
 }
 
+/*
 Agenda::Agenda(Agenda &agenda) {
 
 	fichero = agenda.getFichero();
 	_bd = agenda.getGestorDB();
 	_contactos = agenda.getContactos();
 	_frecuentes = agenda.getFrecuentes();
-}
+}*/
 
 bool Agenda::guardar() {
-	if(bd->guardar(*this))
+	if(_bd->guardar(_contactos))
 		return true;
 	else
 		return false;
 	return false;
 }
-
 bool Agenda::insertar(Contacto contacto) {
 
+#if 0 // ARREGLAR
 	//Si la lista esta vacia se inserta el elemento
 	if(_contactos.empty()) {
 		_contactos.push_back(contacto);
 		return true;
 	//Si el contacto no esta en la lista la funcion find devuelve la última posicion
-	} else if( _contactos.end() not find(_contactos.begin(), _contactos.end(), contacto)) {										//Hacer el sort dentro del if
+	} else if( _contactos.end() != find(_contactos.begin(), _contactos.end(), contacto)) {	//Hacer el sort dentro del if
 		_contactos.push_back(contacto);
 		ordenaAgenda(_contactos); 				//Ordenar por apellido
 		return true;
 	} else {
 		return false;
 	}
-
-
-	_contactos.push_back(contacto);
-	ordenaAgenda(_contactos);
-	return true;
+#endif
+	return true; // Cambiar
 }
 
 list <Contacto> Agenda::buscar(string apellido1) {
 	
-	int encontrados = 0;
 	list <Contacto> aux;
 
 	for(list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
@@ -58,13 +55,7 @@ list <Contacto> Agenda::buscar(string apellido1) {
 			aux.push_back(*iter);
 			iter->buscado();	//Incrementamos el numero de _frecuente
 			actualizarFrecuentes(*iter);  //actualizamos la lista de frecuentes
-			encontrados++;
 		}
-	}
-
-	if (encontrados == 0)
-	{
-		return aux; //No se puede devolver Null. Devolvemos aux, porque si no se encuentran coincidencias sera una lista vacia
 	}
 
 	return aux;
@@ -72,24 +63,17 @@ list <Contacto> Agenda::buscar(string apellido1) {
 
 bool Agenda::borrar(string dni) {
 
-  list <Contacto>::iterator iterf;
-
 	for(list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
 		if(iter->getDNI() == dni) {
 			_contactos.erase(iter);//eliminar contacto con dni
-
-			
 			//Eliminamos contacto de lista de frecuentes (si existe)
-			for(iterf = _frecuentes.begin(); iterf != _frecuentes.end(); iterf++) {
+			for(list <Contacto>::iterator iterf = _frecuentes.begin(); iterf != _frecuentes.end(); iterf++)
 				if(iterf->getDNI() == dni)
-
-					_frecuentes.erase(iterf);	
-			}
-
+					_frecuentes.erase(iterf);
 			return true;
 		}
 	}
-  return false;
+	return false;
 }
 
 bool comparaContactos(Contacto &a, Contacto &b)
@@ -102,6 +86,7 @@ void ordenaAgenda(list <Contacto> lista)
 	lista.sort(comparaContactos);
 }
 
+//Se llama con un contacto ya relleno y se iguala al viejo
 bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 {
 	if (contactoNuevo.getNombre() == "")
@@ -114,22 +99,27 @@ bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 		contactoNuevo.setDNI(contactoViejo.getDNI());
 
 	//Elimina la lista anterior de telefonos, se sustituye por la nueva  ???
-	if (contactoNuevo.getTelefono() == "") {
-		contactoNuevo.removeTelefono();
-		contactoNuevo.addTelefono(contactoViejo.getTelefono());
-	}
+	// ARREGLAR
+#if 0
+	for (list <Contacto>::iterator iter = contactoViejo.begin(); iter != contactoViejo.end(); iter++)  {
+		if (contactoNuevo.getTelefono() == "") {
+			contactoNuevo.removeTelefono();
+			contactoNuevo.addTelefono(contactoViejo.getTelefono());
+		}
 
-	//Estas dos no serían con this. ???
-	borrar(contactoViejo.getDNI());
-	insertar(contactoNuevo);
+		//Estas dos no serían con this. ???
+		this->borrar(contactoViejo.getDNI());
+		this->insertar(contactoNuevo);
+	}
+#endif
 
 	return true;
 }
 
 
-void Agenda::actualizarFrecuentes(Contacto frecuente)
+void Agenda::actualizarFrecuentes (Contacto frecuente)
 {
-	if(_frecuentes.empty())
+/*	if(_frecuentes.empty())
 		_frecuentes.push_back(frecuente);
 
 	list <Contacto>::iterator iter_aux;
@@ -141,12 +131,13 @@ void Agenda::actualizarFrecuentes(Contacto frecuente)
 			encontrado = 1;		//Para que sirve encontrado?
 			iter_aux = iter--;
 			if (iter->numeroBusquedas() > iter_aux->numeroBusquedas())
-				Agenda::ordenaAgenda(_frecuentes);
+				ordenaAgenda(_frecuentes);
 		}
 	}
 
 	if(encontrado == 0)	//Si no esta en la lista, se añade
 		_frecuentes.push_back(frecuente);
+	*/
 }
 
 } //Namespace Agenda

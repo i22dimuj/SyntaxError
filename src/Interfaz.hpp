@@ -15,8 +15,9 @@ class Interfaz {
 		void imprimeContacto(Contacto contacto);
 
 	public:
-		
+		/*
 		Interfaz(Agenda &a);
+		*/
 		Contacto rellenarContacto();
 		int menuAgenda();
 		bool menuFuncion(int opc); //Devuelve FALSE si no se quiere salir, si se quiere salir 						     devuelve TRUE
