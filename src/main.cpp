@@ -12,19 +12,19 @@ using namespace agenda;
 
 int main(int argc, char**argv) {
 
-cout << "Hola mundo." << endl;
+	cout << "Hola mundo." << endl;
 
-//COMENTADO PARA QUITAR FALLOS REDUNDANTES
+	//COMENTADO PARA QUITAR FALLOS REDUNDANTES
 
-string nombre = "nombre.txt";
+	string nombre = "nombre.txt";
 
-GestorDBFichero *g = new GestorDBFichero(nombre);
+	GestorDBFichero *g = new GestorDBFichero(nombre);
 
 
-Agenda a(g);
-Interfaz i();
+	Agenda a(g);
+	Interfaz i();
 
-//SOBRECARGAR OPERADORES = EN AGENDA
+	//SOBRECARGAR OPERADORES = EN AGENDA
 
 	return 0;
 }
