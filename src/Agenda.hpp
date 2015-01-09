@@ -19,9 +19,9 @@ class Agenda {
 		void ordenaAgenda(std::list <Contacto> lista);
 
 	public:
+		Agenda() {};	//Constructor vacio
 		Agenda(GestorDB* g);
 		Agenda(Agenda &agenda);
-		Agenda() {};	//Constructor vacio
 
 		std::string getFichero() {return fichero;};  //<----- Observadores añadidos a la fuerza
 		GestorDB* getGestorDB() {return _bd;};		//<----- Para constructor de copia
