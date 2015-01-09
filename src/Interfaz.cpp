@@ -39,7 +39,6 @@ void Interfaz::menuAgenda()
 	cin >> seleccion;
 
 	if (seleccion == 0) {
-		cout << "ME ZARGO IO" << endl;
 		return; //Le indicamos al main que salga
 
 	} else if ((seleccion < 0) || (seleccion > 8)) {
@@ -191,7 +190,7 @@ void Interfaz::imprimeContacto(Contacto contacto)
 	cout << "DNI: " << contacto.getDNI() << endl;
 	cout << "e-mail: " << contacto.getEmail() << endl;
 
-	cout << "Telefono/s: " << endl;
+	cout << "Telefono/s: ";
 	imprimeTelefono(contacto);
 	imprimeRedSocial(contacto);
 	imprimeDireccionPostal(contacto);
@@ -280,13 +279,12 @@ Contacto Interfaz::rellenarContactoModificar() {
 void Interfaz::imprimirAgenda()
 {
 	list <Contacto> aux;
-	list <Contacto>::iterator iter;
 
 	aux = _agenda.getContactos();
 
 	system("clear");
 
-	for (iter = aux.begin(); iter != aux.end(); iter++)
+	for (list <Contacto>::iterator iter = aux.begin(); iter != aux.end(); iter++)
 	{
 		imprimeContacto(*iter);
 		cout << endl << "<========================================================>" << endl << endl;
@@ -404,14 +402,14 @@ void Interfaz::imprimeTelefono(Contacto contacto)
 	if(contacto.getTelefono().size() == 1)
 	{
 		iter = contacto.getTelefono().begin();
-		cout << "		" << *iter << endl;
+		cout << " " << *iter << endl;
 	}
 
 	else
 	{
 		for(iter = contacto.getTelefono().begin(); iter != contacto.getTelefono().end(); iter++)
 		{
-			cout << "		" << *iter << endl;
+			cout << " " << *iter << endl;
 		}
 	}
 }
