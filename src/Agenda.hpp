@@ -19,7 +19,7 @@ class Agenda {
 		void ordenaAgenda(std::list <Contacto> lista);
 
 	public:
-		Agenda() {};	//Constructor vacio
+		Agenda() {_bd = NULL;};	//Constructor vacio
 		Agenda(GestorDB* g);
 		Agenda(Agenda &agenda);
 

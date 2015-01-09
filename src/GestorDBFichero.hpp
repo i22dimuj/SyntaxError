@@ -17,7 +17,6 @@ class GestorDBFichero : public GestorDB {
 private:
 	std::string _fichero;
 
-
   public:
 	GestorDBFichero(){};  //Constructor vacio
 	GestorDBFichero(std::string fichero) {_fichero = fichero;};
