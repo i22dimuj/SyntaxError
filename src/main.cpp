@@ -10,9 +10,16 @@ using namespace std;
 
 int main(int argc, char**argv) {
 
-	string nombre = "nombre.txt";
+
+	string nombre;
+	cout << "Introduzca el nombre del fichero a cargar: ";
+	cin >> nombre;
 	GestorDBFichero *g = new GestorDBFichero(nombre);
 	Agenda a(g);
+
+	cout << "Nombre fichero : " << a.getFichero() << endl;
+
+	a.getGestorDB()->cargar(a.getFichero());
 
 	Interfaz i(a);
 
