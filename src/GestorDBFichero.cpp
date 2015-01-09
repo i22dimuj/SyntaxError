@@ -15,17 +15,14 @@
 #define MAX 50
 
 using namespace std;
+
 bool GestorDBFichero::guardar(list<Contacto> aux) {
 
-  //Si la agenda esta vacia, no escribiremos nada en el fichero
-	/*
-  if(not a.getContactos())
-		return false;
-		CAMBIAR POR aux.empty();
-		*/
+  if(aux.empty())
+	return false;
 
-  string fichero;
-  ofstream flujoSalida;
+	string fichero;
+	ofstream flujoSalida;
 
 	cout << "Introduzca el nombre del fichero donde se guardaran los contactos: "; 
 	cin >> fichero;
@@ -34,24 +31,21 @@ bool GestorDBFichero::guardar(list<Contacto> aux) {
 	flujoSalida.open(fichero.c_str(), ios::out);
 
 	//Escribimos los contactos en el fichero
-	for (list <Contacto>:: iterator iter = aux.begin(); iter != aux.end(); iter++)
-	{
-		//Creo que estos serían iter y no aux
-		flujoSalida << iter->getNombre() << ",";
-		flujoSalida << iter->getApellido1() << ",";
-		flujoSalida << iter->getApellido2() << ",";
-		flujoSalida << iter->getDNI() << ",";
-		flujoSalida << iter->getEmail() << ",";
+	for (list <Contacto>:: iterator iter = aux.begin(); iter != aux.end(); iter++) {
+		flujoSalida << iter->getNombre() << ","
+		<< iter->getApellido1() << ","
+		<< iter->getApellido2() << ","
+		<< iter->getDNI() << ","
+		<< iter->getEmail() << ",";
 
-#if 0 // ARREGLAR
 		//Lista de telefonos
-		flujoSalida << aux.getTelefono().size() << ",";	//indicamos el numero de elementos
-		for (list <string>:: iterator itert = aux.getTelefono().begin(); itert != aux.getTelefono().end(); itert++)
+		flujoSalida << iter->getTelefono().size() << ",";	//indicamos el numero de elementos
+		for (list <string>:: iterator itert = iter->getTelefono().begin(); itert != iter->getTelefono().end(); itert++)
 			flujoSalida << *itert << ",";
 
 		//Lista de redes sociales
-		flujoSalida << aux.getRedSocial().size() << ",";
-		for (list <redSocial>:: iterator iterr = aux.getRedSocial().begin(); iterr != aux.getRedSocial().end(); iterr++)
+		flujoSalida << iter->getRedSocial().size() << ",";
+		for (list <redSocial>:: iterator iterr = iter->getRedSocial().begin(); iterr != iter->getRedSocial().end(); iterr++)
 		{
 			flujoSalida << iterr->twitter << ",";
 			flujoSalida << iterr->facebook << ",";
@@ -61,8 +55,8 @@ bool GestorDBFichero::guardar(list<Contacto> aux) {
 
 		//Lista de direcciones postales
 		int ultimo = 1;
-		flujoSalida << aux.getDireccionPostal().size() << ",";
-		for (list <direccionPostal>:: iterator iterd = aux.getDireccionPostal().begin(); iterd!=aux.getDireccionPostal().end();iterd++)
+		flujoSalida << iter->getDireccionPostal().size() << ",";
+		for (list <direccionPostal>:: iterator iterd = iter->getDireccionPostal().begin(); iterd!= iter->getDireccionPostal().end(); iterd++)
 		{
 			flujoSalida << iterd->municipio << ",";
 			flujoSalida << iterd->provincia << ",";
@@ -73,14 +67,13 @@ bool GestorDBFichero::guardar(list<Contacto> aux) {
 			flujoSalida << iterd->codigoPostal << ",";
 		}
 
-		if(aux.esFavorito())
+		if(iter->esFavorito())
 			flujoSalida << 1 << ",";
 		else
 			flujoSalida << 0 << ",";
 
-		flujoSalida << aux.numeroBusquedas() << "\n";
+		flujoSalida << iter->numeroBusquedas() << "\n";
 		//Fin de la linea
-#endif
 	}
 
 	//Cerramos el fichero

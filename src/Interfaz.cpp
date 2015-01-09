@@ -103,7 +103,7 @@ bool Interfaz::menuFuncion(int opc)
 			break;
 
 		case 5: //Copia de seguridad
-
+				_agenda.getGestorDB()->guardar(_agenda.getContactos());
 			break;
 
 		case 6: //Borrar contacto
