@@ -70,7 +70,7 @@ bool Interfaz::menuFuncion(int opc)
 		case 2: //Añadir contacto
 			aux = rellenarContacto();
 			_agenda.insertar(aux);
-			cout << "Contacto inserado correctamente." << endl;
+			cout << "Contacto insertado correctamente." << endl;
 			cout << "Pulse enter para continuar" << endl;
 			getchar();
 			getchar();
@@ -80,6 +80,15 @@ bool Interfaz::menuFuncion(int opc)
 			cout << "Introduzca el apellido de la persona que quiere modificar: ";
 			cin >> apellido;
 			aux = seleccionaContacto(_agenda.buscar(apellido));
+
+			//Si no se encuentra un contacto con ese apellido, volvemos al menu
+			if(aux.getApellido1() == ""){
+
+				cout << endl << "Pulse enter para continuar" << endl;
+				getchar();
+				getchar();
+				break;
+			}
 			cout << "--------------------------" << endl;
 			aux2 = rellenarContacto();
 
@@ -199,6 +208,7 @@ Contacto Interfaz::rellenarContacto() {
 	cin >> nombre;
 	cout<<"Introduce el primer apellido del nuevo Contacto: ";
 	cin >> apellido1;
+	getchar();	//Sin el se salta el cin del segundo apellido
 	cout<<"Introduce el segundo apellido del nuevo Contacto: ";
 	cin >> apellido2;
 	cout<<"Introduce el DNI del nuevo Contacto: ";

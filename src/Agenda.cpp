@@ -98,18 +98,16 @@ bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 
 	//Elimina la lista anterior de telefonos, se sustituye por la nueva  ???
 	// ARREGLAR
-#if 0
-	for (list <Contacto>::iterator iter = contactoViejo.begin(); iter != contactoViejo.end(); iter++)  {
-		if (contactoNuevo.getTelefono() == "") {
+
+		if (*(contactoNuevo.getTelefono().begin()) == "") {
 			contactoNuevo.removeTelefono();
 			contactoNuevo.addTelefono(contactoViejo.getTelefono());
 		}
 
 		//Estas dos no serían con this. ???
-		this->borrar(contactoViejo.getDNI());
-		this->insertar(contactoNuevo);
-	}
-#endif
+		borrar(contactoViejo.getDNI());
+		insertar(contactoNuevo);
+
 
 	return true;
 }
