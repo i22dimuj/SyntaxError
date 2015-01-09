@@ -8,9 +8,11 @@
 #include <iostream>
 #include <fstream>
 #include <list>
+#include <sstream>
 #include <stdlib.h>	//Necesario para atoi()
 #include "Agenda.hpp"
 #include "GestorDBFichero.hpp"
+
 
 #define MAX 50
 
@@ -54,7 +56,7 @@ bool GestorDBFichero::guardar(list<Contacto> aux) {
 			for (itert = iter->getTelefono().begin(); itert != iter->getTelefono().end(); itert++)
 				fichero << *itert << ",";
 		}
-		cout << "Fin telefonos" << endl;
+		//cout << "Fin telefonos" << endl;
 
 		//Lista de redes sociales
 		fichero << iter->getRedSocial().size() << ",";
@@ -81,7 +83,7 @@ bool GestorDBFichero::guardar(list<Contacto> aux) {
 			}
 		}
 		*/
-		cout << "Fin redes sociales" << endl;
+		//cout << "Fin redes sociales" << endl;
 
 		//Lista de direcciones postales
 		fichero << iter->getDireccionPostal().size() << ",";
@@ -155,13 +157,6 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 	string nombre, apellido1, apellido2, DNI, email, num_tel, telefono, num_red, twitter, facebook, gplus, url, num_dir, municipio, provincia, calle, portal, piso, puerta, codigo;
 	string favorito, busquedas;
 
-	while (getline(file, linea, ','))
-	{
-		getline(file, linea2, ',');
-		cout << linea << " " << linea2 << endl;
-	}
-
-
 	while (getline(file, nombre, ',')) {
 		getline(file, apellido1, ',');
 		getline(file, apellido2, ',');
@@ -170,18 +165,19 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 
 		//Leemos los telefonos
 		getline(file, num_tel, ',');
-		stringstream convert(num_tel);
-		convert >> cont;
+
+		cont = atoi(num_dir.c_str());
 		while(cont > 0) {
 			getline(file, telefono, ',');
 			telefonos.push_back(telefono);
+			cont--;
 		}
 
 		//Leemos las redes sociales
 
 		getline(file, num_red, ',');
-		stringstream convert(num_red);
-		convert >> cont;
+		;
+		cont = atoi(num_red.c_str());
 		for (int i = cont; i > 0; i--) {
 			getline(file, twitter, ',');
 			getline(file, facebook, ',');
@@ -199,8 +195,8 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 		//Leemos las direcciones postales
 
 		getline(file, num_dir, ',');
-		stringstream convert(num_dir);
-		convert >> cont;
+
+		cont = atoi(num_dir.c_str());
 		while (cont > 0) {
 			getline(file, municipio, ',');
 			getline(file, provincia, ',');
@@ -219,6 +215,7 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 			direcciones.codigoPostal = string(codigo);
 
 			contacto.addDireccionPostal(direcciones);
+			cont--;
 		}
 
 		getline(file, favorito, ',');
@@ -234,17 +231,15 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 		contacto.addTelefono(telefonos);
 
 		int intFavorito;
-		stringstream convert(favorito);
-		convert >> intFavorito;
+		intFavorito = atoi(favorito.c_str());
 
 
 		if(intFavorito == '1')
 			contacto.cambiaFavorito();
 		
 		int busquedasC;
-		stringstream convert(busquedas);
-		convert >> busquedasC;
-		contacto.setFrecuente(busquedasC)
+		busquedasC = atoi(busquedas.c_str());
+		contacto.setFrecuente(busquedasC);
 
 		//Insertamos el contacto en la agenda	
 		contactos.push_back(contacto);
@@ -252,8 +247,5 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 	} //Fin del while (crei que nunca terminaria)
 
 	file.close();
-
-	getchar();
-	getchar();
 	return contactos;
 }

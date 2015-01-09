@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstdio>
+#include <cstdlib>
 #include <fstream>
 #include "Interfaz.hpp"
 #include "Agenda.hpp"
@@ -12,9 +13,9 @@ using namespace std;
 
 int main() {
 
-
+	system("clear");
 	string nombre = "agenda.txt";
-	cout << "El archivo donde se guardará la agenda es: " << nombre << endl;
+	cout << "El archivo donde se guardará la agenda es: " << nombre;
 	getchar();
 
 	GestorDBFichero *g = new GestorDBFichero(nombre);
