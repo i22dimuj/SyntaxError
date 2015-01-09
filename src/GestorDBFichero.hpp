@@ -23,5 +23,6 @@ private:
 	~GestorDBFichero(){};  //Falta hacer el destructor
 	bool guardar(std::list<Contacto>);	//Añadir campo bool para no pedir nombre en caso de copia de seguridad?
 	std::list<Contacto> cargar(const std::string &fichero);
+	std::string getFichero(){return _fichero;};
 };
 #endif /* GESTORDBFICHERO_HPP_ */

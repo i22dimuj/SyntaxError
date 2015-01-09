@@ -8,6 +8,7 @@ using namespace std;
 
 Agenda::Agenda(GestorDB* g) {
 	_bd = g;
+	fichero = g->getFichero();
 }
 
 Agenda::Agenda(Agenda &agenda) {

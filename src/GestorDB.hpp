@@ -20,6 +20,7 @@ public:
 	virtual ~GestorDB() {};
 	virtual bool guardar(std::list<Contacto>) = 0;
 	virtual std::list<Contacto> cargar(const std::string &fichero) = 0;
+	virtual std::string getFichero() = 0;
 
 };
 
