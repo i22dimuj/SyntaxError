@@ -27,7 +27,7 @@ int main() {
 		ofstream fichero(nombre.c_str());
 
 
-	a.getGestorDB()->cargar(a.getFichero());
+	a.setContactos(a.getGestorDB()->cargar(a.getFichero()));
 
 	Interfaz i(a);
 
