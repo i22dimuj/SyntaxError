@@ -140,7 +140,8 @@ Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos)
 	if (listaContactos.empty())
 	{
 		cout << "No se ha encontrado el Contacto en la agenda" << endl;
-		exit(1);
+		Contacto c;
+		return c;
 	}
 
 	else if (listaContactos.size() == 1)
@@ -170,6 +171,12 @@ Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos)
 
 void Interfaz::imprimeContacto(Contacto contacto)
 {
+
+	//Si no se ha encontrado un contacto con el apellido buscado
+	//El contacto estara vacio
+	if(contacto.getApellido1() == "")
+		return;
+
 	cout << "Nombre: " << contacto.getNombre() << endl;
 	cout << "Apellidos: " << contacto.getApellido1() << " " << contacto.getApellido2() << endl;
 	cout << "DNI: " << contacto.getDNI() << endl;
@@ -255,7 +262,7 @@ void Interfaz::imprimeDireccionPostal(Contacto contacto){
 	list <direccionPostal>::iterator iter;
 
 	listaDir = contacto.getDireccionPostal();
-	if (listaDir.empty())
+	if (!listaDir.empty())
 	{
 		for (iter = listaDir.begin(); iter != listaDir.end(); iter++)
 		{
@@ -294,17 +301,18 @@ void Interfaz::imprimeRedSocial(Contacto contacto){
 void Interfaz::imprimeTelefono(Contacto contacto)
 {
 	list <string>::iterator iter;
+
 	if(contacto.getTelefono().size() == 1)
 	{
 		iter = contacto.getTelefono().begin();
-		cout << "   " << *iter << endl;
+		cout << "		" << *iter << endl;
 	}
 
 	else
 	{
 		for(iter = contacto.getTelefono().begin(); iter != contacto.getTelefono().end(); iter++)
 		{
-			cout << "	" << *iter << endl;
+			cout << "		" << *iter << endl;
 		}
 	}
 }
