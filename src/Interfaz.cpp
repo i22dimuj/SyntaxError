@@ -60,7 +60,11 @@ bool Interfaz::menuFuncion(int opc)
 		case 1: //Buscar contacto
 			cout << "Introduzca el apellido de la persona que quiere buscar: ";
 			cin >> apellido;
+			system("clear");
 			imprimeContacto(seleccionaContacto(_agenda.buscar(apellido)));
+			cout << "Pulse enter para continuar" << endl;
+			getchar();
+			getchar();
 		break;
 
 		case 2: //Añadir contacto
