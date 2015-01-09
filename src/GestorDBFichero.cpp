@@ -154,7 +154,8 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 	direccionPostal direcciones;
 	string linea, linea2;
 
-	string nombre, apellido1, apellido2, DNI, email, num_tel, telefono, num_red, twitter, facebook, gplus, url, num_dir, municipio, provincia, calle, portal, piso, puerta, codigo;
+	string nombre, apellido1, apellido2, DNI, email, num_tel,
+	telefono, num_red, twitter, facebook, gplus, url, num_dir, municipio, provincia, calle, portal, piso, puerta, codigo;
 	string favorito, busquedas;
 
 	while (getline(file, nombre, ',')) {
