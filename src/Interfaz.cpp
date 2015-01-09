@@ -179,7 +179,6 @@ Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos)
 
 void Interfaz::imprimeContacto(Contacto contacto)
 {
-
 	//Si no se ha encontrado un contacto con el apellido buscado
 	//El contacto estara vacio
 	if(contacto.getApellido1() == "")
@@ -295,25 +294,20 @@ void Interfaz::verFavoritos()
 {
 	list <Contacto> aux = _agenda.getContactos();
 	system("clear");
-	for (list <Contacto>::iterator iter = aux.begin(); iter != aux.end(); iter++) {
+	for (list <Contacto>::iterator iter = aux.begin(); iter != aux.end(); iter++)
 		if(iter->esFavorito())
 			imprimeContacto(*iter);
-	}
 }
 
 void Interfaz::verFrecuentes()
 {
-
 	list <Contacto> aux;
 	list <Contacto>::iterator iter;
-
-	
 
 	system("clear");
 
 	for (iter = aux.begin(); iter != aux.end(); iter++)
 		imprimeContacto(*iter);
-
 }
 
 struct direccionPostal Interfaz::addDireccionPostal()
@@ -395,21 +389,12 @@ void Interfaz::imprimeRedSocial(Contacto contacto){
 		}
 	}
 }
+
 void Interfaz::imprimeTelefono(Contacto contacto)
 {
-	list <string>::iterator iter;
-
 	if(contacto.getTelefono().size() == 1)
-	{
-		iter = contacto.getTelefono().begin();
-		cout << " " << *iter << endl;
-	}
-
+		cout << " " << *contacto.getTelefono().begin() << endl;
 	else
-	{
-		for(iter = contacto.getTelefono().begin(); iter != contacto.getTelefono().end(); iter++)
-		{
+		for(list <string>::iterator iter = contacto.getTelefono().begin(); iter != contacto.getTelefono().end(); iter++)
 			cout << " " << *iter << endl;
-		}
-	}
 }

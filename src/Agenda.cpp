@@ -26,22 +26,16 @@ bool Agenda::guardar() {
 	return false;
 }
 bool Agenda::insertar(Contacto contacto) {
-
-	// ARREGLAR
-	//Si la lista esta vacia se inserta el elemento
 	if(_contactos.empty()) {
 		_contactos.push_back(contacto);
 		return true;
-	//Si el contacto no esta en la lista la funcion find devuelve la última posicion
-	} else if(!existeDNI(contacto.getDNI())) {	//Hacer el sort dentro del if
+	} else if(!existeDNI(contacto.getDNI())) {
 		_contactos.push_back(contacto);
-		ordenaAgenda(_contactos); 				//Ordenar por apellido
+		ordenaAgenda(_contactos);
 		return true;
 	} else {
 		return false;
 	}
-
-	return true; // Cambiar
 }
 
 list <Contacto> Agenda::buscar(string apellido1) {
