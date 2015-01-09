@@ -144,42 +144,49 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 		getchar();
 	}
 
-	int cont = 0;
+	int cont;
 	Contacto contacto;	//Creamos un contacto "vacio"
 	redSocial redes;
 	list <string> telefonos;
 	list<Contacto> contactos;
 	direccionPostal direcciones;
-	string telephono;
+	string linea, linea2;
 
-	char *num_tel = NULL, *num_red = NULL, *num_dir = NULL, *favorito = NULL;
-	char nombre[MAX], apellido1[MAX], apellido2[MAX], DNI[MAX], email[MAX],
-	telefono[MAX], busquedas[3], twitter[MAX], facebook[MAX], gplus[MAX], url[MAX],
-	municipio[MAX], provincia[MAX], calle[MAX], portal[MAX], piso[MAX], puerta[MAX], codigo[MAX];
+	string nombre, apellido1, apellido2, DNI, email, num_tel, telefono, num_red, twitter, facebook, gplus, url, num_dir, municipio, provincia, calle, portal, piso, puerta, codigo;
+	string favorito, busquedas;
+
+	while (getline(file, linea, ','))
+	{
+		getline(file, linea2, ',');
+		cout << linea << " " << linea2 << endl;
+	}
 
 
-	while (file.getline(nombre,MAX,',')) {
-		file.getline(apellido1, MAX, ',');
-		file.getline(apellido2, MAX, ',');
-		file.getline(DNI, MAX, ',');
-		file.getline(email, MAX, ',');
+	while (getline(file, nombre, ',')) {
+		getline(file, apellido1, ',');
+		getline(file, apellido2, ',');
+		getline(file, DNI, ',');
+		getline(file, email, ',');
 
 		//Leemos los telefonos
-		file.getline(num_tel, 1, ',');
-		cont = atoi(num_tel);
+		getline(file, num_tel, ',');
+		stringstream convert(num_tel);
+		convert >> cont;
 		while(cont > 0) {
-			file.getline(telefono, MAX, ',');
-			telephono = string(telefono);
+			getline(file, telefono, ',');
 			telefonos.push_back(telefono);
 		}
 
-		file.getline(num_red, 1, ',');
-		cont = atoi(num_red);
+		//Leemos las redes sociales
+
+		getline(file, num_red, ',');
+		stringstream convert(num_red);
+		convert >> cont;
 		for (int i = cont; i > 0; i--) {
-			file.getline(twitter, MAX, ',');
-			file.getline(facebook, MAX, ',');
-			file.getline(gplus, MAX, ',');
-			file.getline(url, MAX, ',');
+			getline(file, twitter, ',');
+			getline(file, facebook, ',');
+			getline(file, gplus, ',');
+			getline(file, url, ',');;
 
 			redes.twitter = string(twitter);
 			redes.facebook = string(facebook);
@@ -189,30 +196,33 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 			contacto.addRedSocial(redes);
 		}
 
-		file.getline(num_dir, 1, ',');
-		cont = atoi(num_dir);
+		//Leemos las direcciones postales
+
+		getline(file, num_dir, ',');
+		stringstream convert(num_dir);
+		convert >> cont;
 		while (cont > 0) {
-			file.getline(municipio, MAX, ',');
-			file.getline(provincia, MAX, ',');
-			file.getline(calle, MAX, ',');
-			file.getline(portal, MAX, ',');
-			file.getline(piso, MAX, ',');
-			file.getline(puerta, MAX, ',');
-			file.getline(codigo, MAX, ',');
+			getline(file, municipio, ',');
+			getline(file, provincia, ',');
+			getline(file, calle, ',');
+			getline(file, portal, ',');
+			getline(file, piso, ',');
+			getline(file, puerta, ',');
+			getline(file, codigo, ',');
 
 			direcciones.municipio = string(municipio);
 			direcciones.provincia = string(provincia);
 			direcciones.calle = string(calle);
 			direcciones.portal = string(portal);
-			direcciones.piso = atoi(piso);
+			direcciones.piso = string(piso);
 			direcciones.puerta = string(puerta);
-			direcciones.codigoPostal = atoi(codigo);
+			direcciones.codigoPostal = string(codigo);
 
 			contacto.addDireccionPostal(direcciones);
 		}
 
-		file.getline(favorito, 1, ',');
-		file.getline(busquedas, 3, '\n');
+		getline(file, favorito, ',');
+		getline(file, num_dir, '\n');
 
 
 		//Ahora, a meterlo todo en el contcto wiiiiiii
@@ -223,12 +233,18 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 		contacto.setEmail(string(email));
 		contacto.addTelefono(telefonos);
 
-		int intFavorito = atoi(favorito);
+		int intFavorito;
+		stringstream convert(favorito);
+		convert >> intFavorito;
+
 
 		if(intFavorito == '1')
 			contacto.cambiaFavorito();
 		
-		contacto.setFrecuente(atoi(busquedas));
+		int busquedasC;
+		stringstream convert(busquedas);
+		convert >> busquedasC;
+		contacto.setFrecuente(busquedasC)
 
 		//Insertamos el contacto en la agenda	
 		contactos.push_back(contacto);
@@ -237,5 +253,7 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 
 	file.close();
 
+	getchar();
+	getchar();
 	return contactos;
 }
