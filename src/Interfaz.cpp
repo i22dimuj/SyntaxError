@@ -70,8 +70,8 @@ bool Interfaz::menuFuncion(int opc)
 		case 2: //Añadir contacto
 			aux = rellenarContacto();
 			_agenda.insertar(aux);
-			cout << "Contacto insertado correctamente." << endl;
-			cout << "Pulse enter para continuar" << endl;
+			cout << endl << "Contacto insertado correctamente." << endl;
+			cout << "Pulse enter para continuar";
 			getchar();
 			getchar();
 			break;
@@ -90,7 +90,7 @@ bool Interfaz::menuFuncion(int opc)
 				break;
 			}
 			cout << "--------------------------" << endl;
-			aux2 = rellenarContacto();
+			aux2 = rellenarContactoModificar();
 
 			_agenda.modificar(aux, aux2);
 
@@ -203,18 +203,70 @@ Contacto Interfaz::rellenarContacto() {
 
 	Contacto contacto;
 	string dni, nombre, apellido1, apellido2, telefono;
+	string confirmacion, confirmacion2;
 
 	cout<<"\nIntroduce el nombre del nuevo Contacto: ";
 	cin >> nombre;
+	contacto.setNombre(nombre);
+
 	cout<<"Introduce el primer apellido del nuevo Contacto: ";
 	cin >> apellido1;
+	contacto.setApellido1(apellido1);
+
 	getchar();	//Sin el se salta el cin del segundo apellido
 	cout<<"Introduce el segundo apellido del nuevo Contacto: ";
 	cin >> apellido2;
+	contacto.setApellido2(apellido2);
+
 	cout<<"Introduce el DNI del nuevo Contacto: ";
 	cin >> dni;
+	contacto.setDNI(dni);
+
 	cout<<"Introduce el telefono del nuevo Contacto: ";
 	cin >> telefono;
+	contacto.addTelefono(telefono);
+
+	cout << "¿Introducir Direccion postal? (s/n): ";
+	cin >> confirmacion;
+	if (confirmacion == "s")
+	{
+		do {
+			contacto.addDireccionPostal(addDireccionPostal());
+			cout << "¿Añadir otra direccion postal? (s/n): ";
+			cin >> confirmacion2;
+		}while (confirmacion2 == "s");
+	}
+
+	cout << "¿Introducir Redes Sociales? (s/n): ";
+	cin >> confirmacion;
+	if (confirmacion == "s")
+	{
+		do {
+			contacto.addRedSocial(addRedSocial());
+			cout << "¿Añadir otra red Social? (s/n): ";
+			cin >> confirmacion2;
+		}while (confirmacion2 == "s");
+	}
+
+	return contacto;
+}
+
+Contacto Interfaz::rellenarContactoModificar() {
+
+	Contacto contacto;
+	string dni, nombre, apellido1, apellido2, telefono;
+	getchar();
+
+	cout<<"\nIntroduce el nombre del nuevo Contacto: ";
+	getline(cin, nombre);
+	cout<<"Introduce el primer apellido del nuevo Contacto: ";
+	getline(cin, apellido1);
+	cout<<"Introduce el segundo apellido del nuevo Contacto: ";
+	getline(cin, apellido2);
+	cout<<"Introduce el DNI del nuevo Contacto: ";
+	getline(cin, dni);
+	cout<<"Introduce el telefono del nuevo Contacto: ";
+	getline(cin, telefono);
 
 	contacto.setDNI(dni);
 	contacto.setNombre(nombre);
@@ -237,7 +289,7 @@ void Interfaz::imprimirAgenda()
 	for (iter = aux.begin(); iter != aux.end(); iter++)
 	{
 		imprimeContacto(*iter);
-		cout << endl << "------------------------------------------------------" << endl << endl;
+		cout << endl << "<========================================================>" << endl << endl;
 	}
 
 }
@@ -266,7 +318,28 @@ void Interfaz::verFrecuentes()
 
 }
 
+struct direccionPostal Interfaz::addDireccionPostal()
+{
+	struct direccionPostal direccion;
+	getchar();
 
+	cout << "Municipio: ";
+	getline(cin, direccion.municipio);
+	cout << "Provincia: ";
+	getline(cin, direccion.provincia);
+	cout << "Calle: ";
+	getline(cin, direccion.calle);
+	cout << "Portal: ";
+	getline(cin, direccion.portal);
+	cout << "Piso : ";
+	getline(cin, direccion.piso);
+	cout << "Puerta: ";
+	getline(cin, direccion.puerta);
+	cout << "Codigo Postal : ";
+	getline(cin, direccion.codigoPostal);
+
+	return direccion;
+}
 void Interfaz::imprimeDireccionPostal(Contacto contacto){
 	list <direccionPostal> listaDir;
 	list <direccionPostal>::iterator iter;
@@ -276,7 +349,7 @@ void Interfaz::imprimeDireccionPostal(Contacto contacto){
 	{
 		for (iter = listaDir.begin(); iter != listaDir.end(); iter++)
 		{
-			cout << "-----------------------------" << endl;
+			cout << "---------------------------" << endl;
 			cout << "Municipio: " << iter->municipio << endl;
 			cout << "Provincia: " << iter->provincia << endl;
 			cout << "Calle: " << iter->calle << endl;
@@ -284,10 +357,26 @@ void Interfaz::imprimeDireccionPostal(Contacto contacto){
 			cout << "Piso : " << iter->piso << endl;
 			cout << "Puerta: " << iter->puerta << endl;
 			cout << "Codigo Postal : " << iter->codigoPostal << endl;
-			cout << "----------------------------" << endl;
 		}
 	}
 
+}
+
+struct redSocial Interfaz::addRedSocial()
+{
+	struct redSocial red;
+	getchar();
+
+	cout << "twitter: ";
+	getline(cin, red.twitter);
+	cout << "facebook: ";
+	getline(cin, red.facebook);
+	cout << "gPlus: ";
+	getline(cin, red.gPlus);
+	cout << "url: ";
+	getline(cin, red.url);
+
+	return red;
 }
 
 void Interfaz::imprimeRedSocial(Contacto contacto){

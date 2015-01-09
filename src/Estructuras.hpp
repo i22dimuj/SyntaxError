@@ -17,9 +17,9 @@ struct direccionPostal {
 	std::string provincia;
 	std::string calle;
 	std::string portal;
-	int piso;
+	std::string piso;
 	std::string puerta;
-	int codigoPostal;
+	std::string codigoPostal;
 };
 
 #endif
