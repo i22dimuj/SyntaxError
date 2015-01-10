@@ -20,7 +20,7 @@ Agenda::Agenda(Agenda &agenda) {
 }
 
 bool Agenda::guardar() {
-	if(_bd->guardar(_contactos, )) //Aqui hay que pasarle el nombre del fichero que se le da en interfaz
+	if(_bd->guardar(_contactos, fichero)) //Aqui hay que pasarle el nombre del fichero que se le da en interfaz
 		return true;
 	else
 		return false;

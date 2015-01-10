@@ -15,22 +15,24 @@ int main() {
 
 	system("clear");
 	string nombre = "agenda.txt";
+	string copiaSeguridad = "copiaSeguridad.txt";
 
 	ifstream file(nombre.c_str());
 
 	if(not file.is_open())
 	{
-		cout << "no se ha encontrado \"agenda.txt\". Introduzca el nombre del fichero de la base de datos, o dejelo en blanco para crear una nueva base de datos" << endl;
-		cout << "Fichero: ";
-		getline(cin, nombre);
-		if (nombre == "")
+		ifstream file(copiaSeguridad.c_str());
+
+		if(not file.is_open())
 		{
-			nombre = "agenda.txt";
 			ofstream fichero(nombre.c_str());
+			cout << "Se ha creado una nueva base de datos (pulse enter para continuar)" << endl;
+			getchar();
 		}
 		else
 		{
-			ifstream file(nombre.c_str());
+			ifstream file(copiaSeguridad.c_str());
+			nombre = copiaSeguridad;
 		}
 	}
 
