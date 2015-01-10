@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <fstream>
 #include <algorithm> //Para buscar en la lista
 #include "Contacto.hpp"
 #include "Agenda.hpp"
@@ -56,14 +57,32 @@ list <Contacto> Agenda::buscar(string apellido1) {
 
 bool Agenda::borrar(string dni) {
 
-	for(list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
+
+	if(_contactos.size() == 1){
+
+		list <Contacto>::iterator iter = _contactos.begin();
 		if(iter->getDNI() == dni) {
-			_contactos.erase(iter);//eliminar contacto con dni
-			//Eliminamos contacto de lista de frecuentes (si existe)
-			for(list <Contacto>::iterator iterf = _frecuentes.begin(); iterf != _frecuentes.end(); iterf++)
-				if(iterf->getDNI() == dni)
-					_frecuentes.erase(iterf);
+			_contactos.clear();
+			_frecuentes.clear();
+			ofstream flujo;
+			flujo.open(fichero.c_str(), ios::out);
 			return true;
+
+		}
+
+		return false;
+	}
+
+	else{
+		for(list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
+			if(iter->getDNI() == dni) {
+				_contactos.erase(iter);//eliminar contacto con dni
+				//Eliminamos contacto de lista de frecuentes (si existe)
+				for(list <Contacto>::iterator iterf = _frecuentes.begin(); iterf != _frecuentes.end(); iterf++)
+					if(iterf->getDNI() == dni)
+						_frecuentes.erase(iterf);
+				return true;
+			}
 		}
 	}
 	return false;
@@ -75,15 +94,9 @@ bool Agenda::comparaContactos(const Contacto &a, const Contacto &b)
 }
 
 
-bool operator<(const Contacto &ci, const Contacto &cd){
-
-	return (ci.getApellido1() < cd.getApellido1());
-}
-
 void Agenda::ordenaAgenda(list <Contacto> lista)
 {
 	//lista.sort(comparaContactos);
-	lista.sort();
 }
 
 
