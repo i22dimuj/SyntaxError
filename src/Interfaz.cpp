@@ -117,6 +117,7 @@ bool Interfaz::menuFuncion(int opc)
 
 			cout << "Pulse enter para continuar" << endl;
 			getchar();
+			getchar();
 
 			break;
 
