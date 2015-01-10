@@ -404,7 +404,7 @@ void Interfaz::imprimeTelefono(Contacto contacto)
 {
 	if(contacto.getTelefono().size() == 1)
 		cout << " " << *contacto.getTelefono().begin() << endl;
-	else
+/*	else
 		for(list <string>::iterator iter = contacto.getTelefono().begin(); iter != contacto.getTelefono().end(); iter++)
-			cout << " " << *iter << endl;
+			cout << " " << *iter << endl; */
 }

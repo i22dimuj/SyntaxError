@@ -53,6 +53,7 @@ bool GestorDBFichero::guardar(list<Contacto> aux) {
 		}
 		else
 		{
+			cout << "telefonoSize = " << iter->getTelefono().size() << endl;
 			for (itert = iter->getTelefono().begin(); itert != iter->getTelefono().end(); itert++)
 				fichero << *itert << ",";
 		}
@@ -126,11 +127,11 @@ bool GestorDBFichero::guardar(list<Contacto> aux) {
 
 
 	}
-
+	fichero << "end";
 	//Cerramos el fichero
 	fichero.close();
 
-
+	getchar();
   return true;
 }
 
@@ -147,7 +148,7 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 	}
 
 	int cont;
-	Contacto contacto;	//Creamos un contacto "vacio"
+	//Creamos un contacto "vacio"
 	redSocial redes;
 	list <string> telefonos;
 	list<Contacto> contactos;
@@ -159,89 +160,95 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 	string favorito, busquedas;
 
 	while (getline(file, nombre, ',')) {
-		getline(file, apellido1, ',');
-		getline(file, apellido2, ',');
-		getline(file, DNI, ',');
-		getline(file, email, ',');
+		if (nombre != "end")
+		{
+			Contacto contacto;
 
-		//Leemos los telefonos
-		getline(file, num_tel, ',');
-		cont = atoi(num_tel.c_str());
-		while(cont > 0) {
-			getline(file, telefono, ',');
-			telefonos.push_back(telefono);
-			cont--;
-			cout << flush;
+			getline(file, apellido1, ',');
+			getline(file, apellido2, ',');
+			getline(file, DNI, ',');
+			getline(file, email, ',');
+
+			//Leemos los telefonos
+			telefonos.clear();
+			getline(file, num_tel, ',');
+			cont = atoi(num_tel.c_str());
+			while(cont > 0) {
+				getline(file, telefono, ',');
+				telefonos.push_back(telefono);
+				cont--;
+				cout << flush;
+			}
+
+			//Leemos las redes sociales
+
+			getline(file, num_red, ',');
+			cont = atoi(num_red.c_str());
+			for (int i = cont; i > 0; i--) {
+				getline(file, twitter, ',');
+				getline(file, facebook, ',');
+				getline(file, gplus, ',');
+				getline(file, url, ',');;
+
+				redes.twitter = string(twitter);
+				redes.facebook = string(facebook);
+				redes.gPlus = string(gplus);
+				redes.url = string(url);
+
+				contacto.addRedSocial(redes);
+			}
+
+			//Leemos las direcciones postales
+
+			getline(file, num_dir, ',');
+			cont = atoi(num_dir.c_str());
+			while (cont > 0) {
+				getline(file, municipio, ',');
+				getline(file, provincia, ',');
+				getline(file, calle, ',');
+				getline(file, portal, ',');
+				getline(file, piso, ',');
+				getline(file, puerta, ',');
+				getline(file, codigo, ',');
+
+				direcciones.municipio = string(municipio);
+				direcciones.provincia = string(provincia);
+				direcciones.calle = string(calle);
+				direcciones.portal = string(portal);
+				direcciones.piso = string(piso);
+				direcciones.puerta = string(puerta);
+				direcciones.codigoPostal = string(codigo);
+
+				contacto.addDireccionPostal(direcciones);
+				cont--;
+			}
+
+			getline(file, favorito, ',');
+			getline(file, num_dir, '\n');
+
+
+			//Ahora, a meterlo todo en el contcto wiiiiiii
+			contacto.setNombre(string(nombre));
+			contacto.setApellido1(string(apellido1));
+			contacto.setApellido2(string(apellido2));
+			contacto.setDNI(string(DNI));
+			contacto.setEmail(string(email));
+			contacto.addTelefono(telefonos);
+
+			int intFavorito;
+			intFavorito = atoi(favorito.c_str());
+
+
+			if(intFavorito == '1')
+				contacto.cambiaFavorito();
+
+			int busquedasC;
+			busquedasC = atoi(busquedas.c_str());
+			contacto.setFrecuente(busquedasC);
+
+			//Insertamos el contacto en la agenda
+			contactos.push_back(contacto);
 		}
-
-		//Leemos las redes sociales
-		getline(file, num_red, ',');
-		cont = atoi(num_red.c_str());
-		for (int i = cont; i > 0; i--) {
-			getline(file, twitter, ',');
-			getline(file, facebook, ',');
-			getline(file, gplus, ',');
-			getline(file, url, ',');;
-
-			redes.twitter = string(twitter);
-			redes.facebook = string(facebook);
-			redes.gPlus = string(gplus);
-			redes.url = string(url);
-
-			contacto.addRedSocial(redes);
-		}
-
-		//Leemos las direcciones postales
-
-		getline(file, num_dir, ',');
-		cont = atoi(num_dir.c_str());
-		while (cont > 0) {
-			getline(file, municipio, ',');
-			getline(file, provincia, ',');
-			getline(file, calle, ',');
-			getline(file, portal, ',');
-			getline(file, piso, ',');
-			getline(file, puerta, ',');
-			getline(file, codigo, ',');
-
-			direcciones.municipio = string(municipio);
-			direcciones.provincia = string(provincia);
-			direcciones.calle = string(calle);
-			direcciones.portal = string(portal);
-			direcciones.piso = string(piso);
-			direcciones.puerta = string(puerta);
-			direcciones.codigoPostal = string(codigo);
-
-			contacto.addDireccionPostal(direcciones);
-			cont--;
-		}
-
-		getline(file, favorito, ',');
-		getline(file, num_dir, '\n');
-
-
-		//Ahora, a meterlo todo en el contcto wiiiiiii
-		contacto.setNombre(string(nombre));
-		contacto.setApellido1(string(apellido1));
-		contacto.setApellido2(string(apellido2));
-		contacto.setDNI(string(DNI));
-		contacto.setEmail(string(email));
-		contacto.addTelefono(telefonos);
-
-		int intFavorito;
-		intFavorito = atoi(favorito.c_str());
-
-
-		if(intFavorito == '1')
-			contacto.cambiaFavorito();
-		
-		int busquedasC;
-		busquedasC = atoi(busquedas.c_str());
-		contacto.setFrecuente(busquedasC);
-
-		//Insertamos el contacto en la agenda	
-		contactos.push_back(contacto);
-
 	} //Fin del while (crei que nunca terminaria)
 
 	file.close();
