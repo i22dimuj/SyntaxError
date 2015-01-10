@@ -15,7 +15,6 @@
 class GestorDB {
 
 public:
-	/* TODO: Volver a poner const */
 	GestorDB() {};
 	virtual ~GestorDB() {};
 	virtual bool guardar(std::list<Contacto>, std::string nombreFichero) = 0;

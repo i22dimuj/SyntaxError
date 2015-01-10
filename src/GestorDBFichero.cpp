@@ -9,7 +9,7 @@
 #include <fstream>
 #include <list>
 #include <sstream>
-#include <stdlib.h>	//Necesario para atoi()
+#include <stdlib.h>
 #include "Agenda.hpp"
 #include "GestorDBFichero.hpp"
 
@@ -20,7 +20,7 @@ using namespace std;
 
 bool GestorDBFichero::guardar(list<Contacto> aux, string nombreFichero) {
 	if(aux.empty())
-	return false;
+		return false;
 
 	list <Contacto>:: iterator iter;
 	list <string>:: iterator itert;
@@ -42,55 +42,33 @@ bool GestorDBFichero::guardar(list<Contacto> aux, string nombreFichero) {
 
 		//Lista de telefonos
 		fichero << iter->getTelefono().size() << ",";	//indicamos el numero de elementos
-		if (iter->getTelefono().size() == 1)
-		{
+		if (iter->getTelefono().size() == 1) {
 			itert = iter->getTelefono().begin();
 			fichero << *itert << ",";
-		}
-		else
-		{
+		} else {
 			cout << "telefonoSize = " << iter->getTelefono().size() << endl;
 			for (itert = iter->getTelefono().begin(); itert != iter->getTelefono().end(); itert++)
 				fichero << *itert << ",";
 		}
-		//cout << "Fin telefonos" << endl;
 
 		//Lista de redes sociales
 		fichero << iter->getRedSocial().size() << ",";
-		if (iter->getRedSocial().size() == 0)
-		{
+		if (iter->getRedSocial().size() == 0) {
 			fichero << " ";
-		}
-		else if (iter->getRedSocial().size() == 1)
-		{
+		} else if (iter->getRedSocial().size() == 1) {
 			iterr = iter->getRedSocial().begin();
 			fichero << iterr->twitter << ","
 			<< iterr->facebook << ","
 			<< iterr->gPlus << ","
 			<< iterr->url << ",";
 		}
-		/* REVISAR
-		else
-		{
-			for (iterr = iter->getRedSocial().begin(); iterr != iter->getRedSocial().end(); iterr++) {
-				fichero << iterr->twitter << ","
-				<< iterr->facebook << ","
-				<< iterr->gPlus << ","
-				<< iterr->url << ",";
-			}
-		}
-		*/
-		//cout << "Fin redes sociales" << endl;
 
 		//Lista de direcciones postales
 		fichero << iter->getDireccionPostal().size() << ",";
 
-		if (iter->getDireccionPostal().size() == 0)
-		{
+		if (iter->getDireccionPostal().size() == 0) {
 			fichero << " ";
-		}
-		else if (iter->getDireccionPostal().size() == 1)
-		{
+		} else if (iter->getDireccionPostal().size() == 1) {
 			iterd = iter->getDireccionPostal().begin();
 			fichero << iterd->municipio << ","
 			<< iterd->provincia << ","
@@ -100,18 +78,6 @@ bool GestorDBFichero::guardar(list<Contacto> aux, string nombreFichero) {
 			<< iterd->puerta << ","
 			<< iterd->codigoPostal << ",";
 		}
-		/* REVISAR TAMBIEN !!
-		else
-		for (iterd = iter->getDireccionPostal().begin(); iterd!= iter->getDireccionPostal().end(); iterd++) {
-			fichero << iterd->municipio << ","
-			<< iterd->provincia << ","
-			<< iterd->calle << ","
-			<< iterd->portal << ","
-			<< iterd->piso << ","
-			<< iterd->puerta << ","
-			<< iterd->codigoPostal << ",";
-		}
-		*/
 
 		if(iter->esFavorito())
 			fichero << 1 << ",";
@@ -119,10 +85,8 @@ bool GestorDBFichero::guardar(list<Contacto> aux, string nombreFichero) {
 			fichero << 0 << ",";
 
 		fichero << iter->numeroBusquedas() << "\n";
-		//Fin de la linea
-
-
 	}
+
 	fichero << "end";
 	//Cerramos el fichero
 	fichero.close();
@@ -134,10 +98,9 @@ bool GestorDBFichero::guardar(list<Contacto> aux, string nombreFichero) {
 
 
 list<Contacto> GestorDBFichero::cargar(const string &fichero) {
-
 	ifstream file(fichero.c_str());
 
-	if(not file.is_open()) {
+	if (not file.is_open()) {
 		cout << "El fichero no se ha podido abrir" << endl;
 		getchar();
 		getchar();
@@ -168,7 +131,7 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 			//Leemos los telefonos
 			getline(file, num_tel, ',');
 			cont = atoi(num_tel.c_str());
-			while(cont > 0) {
+			while (cont > 0) {
 				getline(file, telefono, ',');
 				contacto.addTelefono(telefono);
 				cont--;

@@ -19,18 +19,14 @@ int main() {
 
 	ifstream file(nombre.c_str());
 
-	if(not file.is_open())
-	{
+	if(not file.is_open()) {
 		ifstream file(copiaSeguridad.c_str());
 
-		if(not file.is_open())
-		{
+		if(not file.is_open()) {
 			ofstream fichero(nombre.c_str());
 			cout << "Se ha creado una nueva base de datos (pulse enter para continuar)" << endl;
 			getchar();
-		}
-		else
-		{
+		} else {
 			ifstream file(copiaSeguridad.c_str());
 			nombre = copiaSeguridad;
 		}
@@ -39,14 +35,11 @@ int main() {
 	GestorDBFichero *g = new GestorDBFichero(nombre);
 	Agenda a(g);
 
-
 	a.setContactos(a.getGestorDB()->cargar(a.getFichero()));
 
 	Interfaz i(a);
 
 	i.menuAgenda(nombre);
-
-	//SOBRECARGAR OPERADORES = EN AGENDA
 
 	return 0;
 }

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <list>
 #include <fstream>
-#include <algorithm> //Para buscar en la lista
 #include "Contacto.hpp"
 #include "Agenda.hpp"
 
@@ -21,14 +20,15 @@ Agenda::Agenda(Agenda &agenda) {
 }
 
 bool Agenda::guardar() {
-	if(_bd->guardar(_contactos, fichero)) //Aqui hay que pasarle el nombre del fichero que se le da en interfaz
+	 //Se pasa el nombre del fichero que se le da en interfaz
+	if (_bd->guardar(_contactos, fichero))
 		return true;
 	else
 		return false;
-	return false;
 }
+
 bool Agenda::insertar(Contacto contacto) {
-	if(_contactos.empty()) {
+	if (_contactos.empty()) {
 		_contactos.push_back(contacto);
 		return true;
 	} else if(!existeDNI(contacto.getDNI())) {
@@ -41,11 +41,10 @@ bool Agenda::insertar(Contacto contacto) {
 }
 
 list <Contacto> Agenda::buscar(string apellido1) {
-	
 	list <Contacto> aux;
 
-	for(list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
-		if(iter->getApellido1() == apellido1) {
+	for (list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
+		if (iter->getApellido1() == apellido1) {
 			aux.push_back(*iter);
 			iter->buscado();	//Incrementamos el numero de _frecuente
 			actualizarFrecuentes(*iter);  //actualizamos la lista de frecuentes
@@ -56,30 +55,24 @@ list <Contacto> Agenda::buscar(string apellido1) {
 }
 
 bool Agenda::borrar(string dni) {
-
-
-	if(_contactos.size() == 1){
-
+	if (_contactos.size() == 1) {
 		list <Contacto>::iterator iter = _contactos.begin();
-		if(iter->getDNI() == dni) {
+		if (iter->getDNI() == dni) {
 			_contactos.clear();
 			_frecuentes.clear();
 			ofstream flujo;
 			flujo.open(fichero.c_str(), ios::out);
 			return true;
-
 		}
 
 		return false;
-	}
-
-	else{
-		for(list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
-			if(iter->getDNI() == dni) {
-				_contactos.erase(iter);//eliminar contacto con dni
+	} else {
+		for (list <Contacto>::iterator iter = _contactos.begin(); iter != _contactos.end(); iter++) {
+			if (iter->getDNI() == dni) {
+				_contactos.erase(iter);//eliminar contacto por dni
 				//Eliminamos contacto de lista de frecuentes (si existe)
-				for(list <Contacto>::iterator iterf = _frecuentes.begin(); iterf != _frecuentes.end(); iterf++)
-					if(iterf->getDNI() == dni)
+				for (list <Contacto>::iterator iterf = _frecuentes.begin(); iterf != _frecuentes.end(); iterf++)
+					if (iterf->getDNI() == dni)
 						_frecuentes.erase(iterf);
 				return true;
 			}
@@ -90,20 +83,17 @@ bool Agenda::borrar(string dni) {
 
 bool Agenda::comparaContactos(const Contacto &a, const Contacto &b)
 {
+	cout << "a: " << a.getApellido1() << "| b: " << b.getApellido1() << endl;
 	return a.getApellido1() < b.getApellido1();
 }
 
-
 void Agenda::ordenaAgenda(list <Contacto> lista)
 {
-	//lista.sort(comparaContactos);
+//	lista.sort(comparaContactos);
 }
 
-
-
 //Se llama con un contacto ya relleno y se iguala al viejo
-bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
-{
+bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo) {
 	string fav;
 
 	if (contactoNuevo.getNombre() == "")
@@ -115,44 +105,14 @@ bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 	if (contactoNuevo.getDNI() == "")
 		contactoNuevo.setDNI(contactoViejo.getDNI());
 
-	//Elimina la lista anterior de telefonos, se sustituye por la nueva  ???
-	// ARREGLAR
-
+	//Elimina la lista anterior de telefonos, se sustituye por la nueva
 	if (*(contactoNuevo.getTelefono().begin()) == "") {
 		contactoNuevo.removeTelefono();
 		contactoNuevo.addTelefono(contactoViejo.getTelefono());
 	}
 
-	if(contactoViejo.esFavorito()){
-
-		cout << "El contacto SI esta en la lista de favoritos" << endl;
-		cout << "¿Quieres que deje de ser favorito? (s/n):";
-
-		cin >> fav;
-
-		//Al declarar contactoNuevo, por defecto estara como NO favorito
-		if(fav != "s")
-			contactoNuevo.cambiaFavorito();
-	}
-
-	else{
-
-		cout << "El contacto NO esta en la lista de favoritos" << endl;
-		cout << "¿Quieres que sea favorito? (s/n):";
-
-		cin >> fav;
-
-		if(fav == "s")
-			contactoNuevo.cambiaFavorito();
-
-
-	}
-
-
-		//Estas dos no serían con this. ???
 		borrar(contactoViejo.getDNI());
 		insertar(contactoNuevo);
-
 
 	return true;
 }
@@ -176,20 +136,18 @@ void Agenda::actualizarFrecuentes (Contacto frecuente)
 		}
 	}
 
-	if(encontrado == 0)	//Si no esta en la lista, se añade
+	if (encontrado == 0)	//Si no esta en la lista, se añade
 		_frecuentes.push_back(frecuente);
 	*/
 }
 
-bool Agenda::existeDNI(string DNI)
-{
+bool Agenda::existeDNI(string DNI) {
 	list <Contacto>::iterator iter;
 
-	for (iter = _contactos.begin(); iter != _contactos.end(); iter++)
-	{
+	for (iter = _contactos.begin(); iter != _contactos.end(); iter++) {
 		if (iter->getDNI() == DNI)
 			return true;
 	}
-	return false;
 
+	return false;
 }

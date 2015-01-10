@@ -8,7 +8,6 @@
 #include "Estructuras.hpp"
 
 using namespace std;
-//Completamos el paso de la agenda desde el main ----> ¿Otra forma? //Similar a constructor de copia de Agenda
 
 Interfaz::Interfaz(Agenda &a) {
 	_agenda.setFichero(a.getFichero());
@@ -17,48 +16,46 @@ Interfaz::Interfaz(Agenda &a) {
 	_agenda.setFrecuentes(a.getFrecuentes());
 }
 
-void Interfaz::menuAgenda(string fichero)
-{
+void Interfaz::menuAgenda(string fichero) {
 	int seleccion;
 
 	do {
-	system("clear");
-	cout << "----- Agenda -----" << endl;
-	cout << "Base de datos cargada: " << fichero << endl << endl;
-	cout << "Menu:" << endl;
-	cout << "1) Buscar contacto" << endl;
-	cout << "2) Añadir contacto" << endl;
-	cout << "3) Modificar contacto" << endl;
-	cout << "4) Imprimir lista de contactos" << endl;
-	cout << "5) Copia de seguridad" << endl;
-	cout << "6) Borrar contacto" << endl;
-	cout << "7) Contactos frecuentes" << endl;
-	cout << "8) Contactos favoritos" << endl;
-	cout << "0) Salir" << endl << endl;
-	cout << "Seleccione una opción y pulse enter: ";
+		system("clear");
+		cout << "----- Agenda -----" << endl;
+		cout << "Base de datos cargada: " << fichero << endl << endl;
+		cout << "Menu:" << endl;
+		cout << "1) Buscar contacto" << endl;
+		cout << "2) Añadir contacto" << endl;
+		cout << "3) Modificar contacto" << endl;
+		cout << "4) Imprimir lista de contactos" << endl;
+		cout << "5) Copia de seguridad" << endl;
+		cout << "6) Borrar contacto" << endl;
+		cout << "7) Contactos frecuentes" << endl;
+		cout << "8) Contactos favoritos" << endl;
+		cout << "0) Salir" << endl << endl;
+		cout << "Seleccione una opción y pulse enter: ";
 
-	cin >> seleccion;
+		cin >> seleccion;
 
-	if (seleccion == 0) {
-		return; //Le indicamos al main que salga
-
-	} else if ((seleccion < 0) || (seleccion > 8)) {
-		cout << "Seleccione una opcion valida (persione enter): " << endl;
-		getchar();
-	} else {
-		menuFuncion(seleccion);
-	}
+		if (seleccion == 0) {
+			return;
+		} else if ((seleccion < 0) || (seleccion > 8)) {
+			cout << "Seleccione una opcion valida (persione enter): " << endl;
+			getchar();
+		} else {
+			menuFuncion(seleccion);
+		}
 	} while (true);
 }
 
-bool Interfaz::menuFuncion(int opc)
-{
+bool Interfaz::menuFuncion(int opc) {
 	string dni, apellido;
 	Contacto aux, aux2;
 	string copiaSeguridad = "copiaSeguridad.txt";
 
 	switch(opc) {
-		case 1: //Buscar contacto
+		//Buscar contacto
+		case 1:
 			cout << "Introduzca el apellido de la persona que quiere buscar: ";
 			cin >> apellido;
 			system("clear");
@@ -66,16 +63,14 @@ bool Interfaz::menuFuncion(int opc)
 			cout << "Pulse enter para continuar" << endl;
 			getchar();
 			getchar();
-		break;
+			break;
 
-		case 2: //Añadir contacto
+		//Añadir contacto
+		case 2:
 			aux = rellenarContacto();
-			if (_agenda.insertar(aux))
-			{
+			if (_agenda.insertar(aux)) {
 				cout << endl << "Contacto insertado correctamente." << endl;
-			}
-			else
-			{
+			} else {
 				cout << "Se ha producido un fallo al intentar insertar 2 contactos con el mismo DNI" << endl;
 			}
 			cout << "Pulse enter para continuar";
@@ -83,14 +78,15 @@ bool Interfaz::menuFuncion(int opc)
 			getchar();
 			break;
 
-		case 3: //Modificar contacto
+		//Modificar contacto
+		case 3:
+
 			cout << "Introduzca el apellido de la persona que quiere modificar: ";
 			cin >> apellido;
 			aux = seleccionaContacto(_agenda.buscar(apellido));
 
 			//Si no se encuentra un contacto con ese apellido, volvemos al menu
-			if(aux.getApellido1() == ""){
-
+			if(aux.getApellido1() == "") {
 				cout << endl << "Pulse enter para continuar" << endl;
 				getchar();
 				getchar();
@@ -104,81 +100,79 @@ bool Interfaz::menuFuncion(int opc)
 
 			break;
 
-		case 4: //Imprimir Agenda
+		//Imprimir Agenda
+		case 4:
 			imprimirAgenda();
 			cout << "Pulse enter para continuar" << endl;
 			getchar();
 			getchar();
 			break;
 
-		case 5: //Copia de seguridad
-				_agenda.getGestorDB()->guardar(_agenda.getContactos(), copiaSeguridad);
+		//Copia de seguridad
+		case 5:
+			if(_agenda.getGestorDB()->guardar(_agenda.getContactos(), copiaSeguridad))
+				cout << "Copia de seguridad realizada con éxito." << endl;
+			else
+				cout << "Fallo en la copia de seguridad." << endl;
+
+			getchar();
 			break;
 
-		case 6: //Borrar contacto
+		//Borrar contacto
+		case 6:
 			cout << "Introduzca el DNI de la persona que quiere borrar: ";
 			cin >> dni;
-
-			if (_agenda.borrar(dni))
-			{
+			if (_agenda.borrar(dni)) {
 				_agenda.guardar();
 				cout << "Borrado efectuado con exito" << endl;
-			}
-			else
+			} else {
 				cout << "No se ha podido borrar el contacto. Quizas el DNI introducino no exista." << endl;
-
-
+			}
 			cout << "Pulse enter para continuar" << endl;
 			getchar();
-			getchar();
-
 			break;
 
-		case 7: //Mostrar frecuentes
+		//Mostrar frecuentes
+		case 7:
 			verFrecuentes();
 			break;
 
-		case 8: //Mostrar favoritos
+		//Mostrar favoritos
+		case 8:
 			verFavoritos();
 			cout << endl << "Pulse enter para continuar";
 			getchar();
 			getchar();
 			break;
 
-		case 0: //Salir
+		//Salir
+		case 0:
 			return false;
 			break;
 
 		default:
-			cout << "Ha habido un problema en menuFunion" << cout;
+			cout << "Ha habido un problema en menuFunion." << cout;
 			break;
 	}
 	return true;
 }
 
-Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos)
-{
+Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos) {
 	list <Contacto>::iterator iter;
 	int i = 0, seleccion;
 
 	system("clear");
-	if (listaContactos.empty())
-	{
+	if (listaContactos.empty()) {
 		cout << "No se ha encontrado el Contacto en la agenda" << endl;
 		Contacto c;
+
 		return c;
-	}
-
-	else if (listaContactos.size() == 1)
-	{
+	} else if (listaContactos.size() == 1) {
 		iter = listaContactos.begin();
-		return *iter;
-	}
 
-	else
-	{
-		for (iter = listaContactos.begin(); iter != listaContactos.end(); iter++)
-		{
+		return *iter;
+	} else {
+		for (iter = listaContactos.begin(); iter != listaContactos.end(); iter++) {
 			cout << i << ") " << iter->getNombre() << " " << iter->getApellido1() << " " << iter->getApellido2() << endl;
 			i++;
 		}
@@ -190,12 +184,9 @@ Contacto Interfaz::seleccionaContacto(list <Contacto> listaContactos)
 
 		return *iter;
 	}
-
-
 }
 
-void Interfaz::imprimeContacto(Contacto contacto)
-{
+void Interfaz::imprimeContacto(Contacto contacto) {
 	//Si no se ha encontrado un contacto con el apellido buscado
 	//El contacto estara vacio
 	if(contacto.getApellido1() == "")
@@ -210,12 +201,9 @@ void Interfaz::imprimeContacto(Contacto contacto)
 	imprimeTelefono(contacto);
 	imprimeRedSocial(contacto);
 	imprimeDireccionPostal(contacto);
-
-	
 }
 
 Contacto Interfaz::rellenarContacto() {
-
 	Contacto contacto;
 	string dni, nombre, apellido1, apellido2, telefono, email;
 	string confirmacion, confirmacion2;
@@ -228,7 +216,8 @@ Contacto Interfaz::rellenarContacto() {
 	cin >> apellido1;
 	contacto.setApellido1(apellido1);
 
-	getchar();	//Sin el se salta el cin del segundo apellido
+	//Sin el se salta el cin del segundo apellido
+	getchar();
 	cout<<"Introduce el segundo apellido del nuevo Contacto: ";
 	cin >> apellido2;
 	contacto.setApellido2(apellido2);
@@ -253,8 +242,7 @@ Contacto Interfaz::rellenarContacto() {
 
 	cout << "¿Introducir Direccion postal? (s/n): ";
 	cin >> confirmacion;
-	if (confirmacion == "s")
-	{
+	if (confirmacion == "s") {
 		contacto.addDireccionPostal(addDireccionPostal());
 		/*
 		do {
@@ -267,8 +255,7 @@ Contacto Interfaz::rellenarContacto() {
 
 	cout << "¿Introducir Redes Sociales? (s/n): ";
 	cin >> confirmacion;
-	if (confirmacion == "s")
-	{
+	if (confirmacion == "s") {
 		contacto.addRedSocial(addRedSocial());
 		/*
 		do {
@@ -283,9 +270,8 @@ Contacto Interfaz::rellenarContacto() {
 }
 
 Contacto Interfaz::rellenarContactoModificar() {
-
 	Contacto contacto;
-	string dni, nombre, apellido1, apellido2, telefono;
+	string dni, nombre, apellido1, apellido2, telefono, confirmacion;
 	getchar();
 
 	cout<<"\nIntroduce el nombre del nuevo Contacto: ";
@@ -305,41 +291,40 @@ Contacto Interfaz::rellenarContactoModificar() {
 	contacto.setApellido2(apellido2);
 	contacto.addTelefono(telefono);
 
+	cout << "¿Quiere que el contacto sea favorito? (s/n): ";
+	cin >> confirmacion;
+	if (confirmacion == "s")
+		contacto.cambiaFavorito();
+
 	return contacto;
 }
 
-void Interfaz::imprimirAgenda()
-{
+void Interfaz::imprimirAgenda() {
 	list <Contacto> aux;
 
 	aux = _agenda.getContactos();
 
 	system("clear");
 
-	for (list <Contacto>::iterator iter = aux.begin(); iter != aux.end(); iter++)
-	{
+	for (list <Contacto>::iterator iter = aux.begin(); iter != aux.end(); iter++) {
 		imprimeContacto(*iter);
 		cout << endl << "<========================================================>" << endl << endl;
 	}
 
 }
-void Interfaz::verFavoritos()
-{
+
+void Interfaz::verFavoritos() {
 	list <Contacto> aux = _agenda.getContactos();
 	system("clear");
-	for (list <Contacto>::iterator iter = aux.begin(); iter != aux.end(); iter++)
-	{
-		if(iter->esFavorito())
-		{
+	for (list <Contacto>::iterator iter = aux.begin(); iter != aux.end(); iter++) {
+		if(iter->esFavorito()) {
 			imprimeContacto(*iter);
 			cout << endl << "<===================================>" << endl;
 		}
 	}
-
 }
 
-void Interfaz::verFrecuentes()
-{
+void Interfaz::verFrecuentes() {
 	list <Contacto> aux;
 	list <Contacto>::iterator iter;
 
@@ -349,9 +334,8 @@ void Interfaz::verFrecuentes()
 		imprimeContacto(*iter);
 }
 
-struct direccionPostal Interfaz::addDireccionPostal()
-{
-	struct direccionPostal direccion;
+direccionPostal Interfaz::addDireccionPostal() {
+	direccionPostal direccion;
 	getchar();
 
 	cout << "Municipio: ";
@@ -371,15 +355,14 @@ struct direccionPostal Interfaz::addDireccionPostal()
 
 	return direccion;
 }
-void Interfaz::imprimeDireccionPostal(Contacto contacto){
+
+void Interfaz::imprimeDireccionPostal(Contacto contacto) {
 	list <direccionPostal> listaDir;
 	list <direccionPostal>::iterator iter;
 
 	listaDir = contacto.getDireccionPostal();
-	if (!listaDir.empty())
-	{
-		for (iter = listaDir.begin(); iter != listaDir.end(); iter++)
-		{
+	if (!listaDir.empty()) {
+		for (iter = listaDir.begin(); iter != listaDir.end(); iter++) {
 			cout << "---------------------------" << endl;
 			cout << "Municipio: " << iter->municipio << endl;
 			cout << "Provincia: " << iter->provincia << endl;
@@ -390,11 +373,9 @@ void Interfaz::imprimeDireccionPostal(Contacto contacto){
 			cout << "Codigo Postal : " << iter->codigoPostal << endl;
 		}
 	}
-
 }
 
-struct redSocial Interfaz::addRedSocial()
-{
+redSocial Interfaz::addRedSocial() {
 	struct redSocial red;
 	getchar();
 
@@ -410,15 +391,13 @@ struct redSocial Interfaz::addRedSocial()
 	return red;
 }
 
-void Interfaz::imprimeRedSocial(Contacto contacto){
+void Interfaz::imprimeRedSocial(Contacto contacto) {
 	list <redSocial> listaRed;
 	list <redSocial>::iterator iter;
 
 	listaRed = contacto.getRedSocial();
-	if (!listaRed.empty())
-	{
-		for (iter = listaRed.begin(); iter != listaRed.end(); iter++)
-		{
+	if (!listaRed.empty()) {
+		for (iter = listaRed.begin(); iter != listaRed.end(); iter++) {
 			cout << "---------------------------" << endl;
 			cout << "twitter: " << iter->twitter << endl;
 			cout << "facebook: " << iter->facebook << endl;
@@ -429,8 +408,7 @@ void Interfaz::imprimeRedSocial(Contacto contacto){
 	}
 }
 
-void Interfaz::imprimeTelefono(Contacto contacto)
-{
+void Interfaz::imprimeTelefono(Contacto contacto) {
 	if(contacto.getTelefono().size() == 1)
 		cout << " " << *contacto.getTelefono().begin() << endl;
 /*	else

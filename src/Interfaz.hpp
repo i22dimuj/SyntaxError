@@ -18,15 +18,14 @@ class Interfaz {
 		Contacto rellenarContacto();
 		Contacto rellenarContactoModificar();
 		void menuAgenda(std::string fichero);
-		bool menuFuncion(int opc); //Devuelve FALSE si no se quiere salir, si se quiere salir devuelve TRUE
+		bool menuFuncion(int opc);
 		void imprimirAgenda();
 		void verFavoritos();
 		void verFrecuentes();
-		struct direccionPostal addDireccionPostal();
+		direccionPostal addDireccionPostal();
 		void imprimeDireccionPostal(Contacto contacto);
-		struct redSocial addRedSocial();
+		redSocial addRedSocial();
 		void imprimeRedSocial(Contacto contacto);
 		void imprimeTelefono(Contacto contacto);
-
 };
 #endif

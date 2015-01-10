@@ -18,10 +18,10 @@ private:
 	std::string _fichero;
 
   public:
-	GestorDBFichero(){};  //Constructor vacio
+	GestorDBFichero() {};
 	GestorDBFichero(std::string fichero) {_fichero = fichero;};
-	~GestorDBFichero(){};  //Falta hacer el destructor
-	bool guardar(std::list<Contacto>, std::string nombreFichero);	//Añadir campo bool para no pedir nombre en caso de copia de seguridad?
+	~GestorDBFichero(){};
+	bool guardar(std::list<Contacto>, std::string nombreFichero);
 	std::list<Contacto> cargar(const std::string &fichero);
 	std::string getFichero(){return _fichero;};
 };
