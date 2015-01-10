@@ -70,11 +70,16 @@ bool Interfaz::menuFuncion(int opc)
 
 		case 2: //Añadir contacto
 			aux = rellenarContacto();
-			_agenda.insertar(aux);
-			cout << endl << "Contacto insertado correctamente." << endl;
+			if (_agenda.insertar(aux))
+			{
+				cout << endl << "Contacto insertado correctamente." << endl;
+			}
+			else
+			{
+				cout << "Se ha producido un fallo al intentar insertar 2 contactos con el mismo DNI" << endl;
+			}
 			cout << "Pulse enter para continuar";
 			_agenda.guardar();
-			getchar();
 			getchar();
 			break;
 
@@ -232,6 +237,10 @@ Contacto Interfaz::rellenarContacto() {
 	cin >> dni;
 	contacto.setDNI(dni);
 
+	cout<<"Introduce el telefono del nuevo Contacto: ";
+	cin >> telefono;
+	contacto.addTelefono(telefono);
+
 	cout << "¿Quiere introducir un email? (s/n): ";
 	cin >> confirmacion;
 	if(confirmacion == "s") {
@@ -242,30 +251,32 @@ Contacto Interfaz::rellenarContacto() {
 	}
 	contacto.setEmail(email);
 
-	cout<<"Introduce el telefono del nuevo Contacto: ";
-	cin >> telefono;
-	contacto.addTelefono(telefono);
-
 	cout << "¿Introducir Direccion postal? (s/n): ";
 	cin >> confirmacion;
 	if (confirmacion == "s")
 	{
+		contacto.addDireccionPostal(addDireccionPostal());
+		/*
 		do {
 			contacto.addDireccionPostal(addDireccionPostal());
 			cout << "¿Añadir otra direccion postal? (s/n): ";
 			cin >> confirmacion2;
 		}while (confirmacion2 == "s");
+		*/
 	}
 
 	cout << "¿Introducir Redes Sociales? (s/n): ";
 	cin >> confirmacion;
 	if (confirmacion == "s")
 	{
+		contacto.addRedSocial(addRedSocial());
+		/*
 		do {
 			contacto.addRedSocial(addRedSocial());
 			cout << "¿Añadir otra red Social? (s/n): ";
 			cin >> confirmacion2;
 		}while (confirmacion2 == "s");
+		*/
 	}
 
 	return contacto;
