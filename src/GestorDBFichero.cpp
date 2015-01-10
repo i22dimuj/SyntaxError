@@ -166,18 +166,16 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 
 		//Leemos los telefonos
 		getline(file, num_tel, ',');
-
-		cont = atoi(num_dir.c_str());
+		cont = atoi(num_tel.c_str());
 		while(cont > 0) {
 			getline(file, telefono, ',');
 			telefonos.push_back(telefono);
 			cont--;
+			cout << "";//Error de buffer sin el
 		}
 
 		//Leemos las redes sociales
-
 		getline(file, num_red, ',');
-		;
 		cont = atoi(num_red.c_str());
 		for (int i = cont; i > 0; i--) {
 			getline(file, twitter, ',');
@@ -196,7 +194,6 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 		//Leemos las direcciones postales
 
 		getline(file, num_dir, ',');
-
 		cont = atoi(num_dir.c_str());
 		while (cont > 0) {
 			getline(file, municipio, ',');

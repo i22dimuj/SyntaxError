@@ -200,7 +200,7 @@ void Interfaz::imprimeContacto(Contacto contacto)
 Contacto Interfaz::rellenarContacto() {
 
 	Contacto contacto;
-	string dni, nombre, apellido1, apellido2, telefono;
+	string dni, nombre, apellido1, apellido2, telefono, email;
 	string confirmacion, confirmacion2;
 
 	cout<<"\nIntroduce el nombre del nuevo Contacto: ";
@@ -219,6 +219,18 @@ Contacto Interfaz::rellenarContacto() {
 	cout<<"Introduce el DNI del nuevo Contacto: ";
 	cin >> dni;
 	contacto.setDNI(dni);
+
+	cout << "¿Quiere introducir un email?: ";
+	cin >> confirmacion;
+	if(confirmacion == "s") {
+		cout << "Inserte el email: ";
+		cin >> email;
+	} else {
+		email =" ";
+	}
+	contacto.setEmail(email);
+
+	cout << "El email es \"" << contacto.getEmail() << "\"" << endl;
 
 	cout<<"Introduce el telefono del nuevo Contacto: ";
 	cin >> telefono;
