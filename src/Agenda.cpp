@@ -83,7 +83,6 @@ bool Agenda::borrar(string dni) {
 
 bool Agenda::comparaContactos(const Contacto &a, const Contacto &b)
 {
-	cout << "a: " << a.getApellido1() << "| b: " << b.getApellido1();
 	return a.getApellido1() < b.getApellido1();
 }
 
