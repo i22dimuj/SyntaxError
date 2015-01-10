@@ -83,13 +83,13 @@ bool Agenda::borrar(string dni) {
 
 bool Agenda::comparaContactos(const Contacto &a, const Contacto &b)
 {
-	cout << "a: " << a.getApellido1() << "| b: " << b.getApellido1() << endl;
+	cout << "a: " << a.getApellido1() << "| b: " << b.getApellido1();
 	return a.getApellido1() < b.getApellido1();
 }
 
-void Agenda::ordenaAgenda(list <Contacto> lista)
+void Agenda::ordenaAgenda(list <Contacto> &lista) const
 {
-//	lista.sort(comparaContactos);
+	lista.sort(comparaContactos);
 }
 
 //Se llama con un contacto ya relleno y se iguala al viejo

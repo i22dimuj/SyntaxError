@@ -15,8 +15,8 @@ class Agenda {
 		std::list <Contacto> _contactos;
 		std::list <Contacto> _frecuentes;
 		GestorDB* _bd;
-		bool comparaContactos(const Contacto &a, const Contacto &b);
-		void ordenaAgenda(std::list <Contacto> lista);
+		static bool comparaContactos(const Contacto &a, const Contacto &b);
+		void ordenaAgenda(std::list <Contacto> &lista) const;
 
 	public:
 		Agenda() {_bd = NULL;};	//Constructor vacio
