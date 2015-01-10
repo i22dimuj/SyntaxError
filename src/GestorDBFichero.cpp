@@ -63,7 +63,7 @@ bool GestorDBFichero::guardar(list<Contacto> aux) {
 		fichero << iter->getRedSocial().size() << ",";
 		if (iter->getRedSocial().size() == 0)
 		{
-
+			fichero << " ";
 		}
 		else if (iter->getRedSocial().size() == 1)
 		{
@@ -91,7 +91,7 @@ bool GestorDBFichero::guardar(list<Contacto> aux) {
 
 		if (iter->getDireccionPostal().size() == 0)
 		{
-
+			fichero << " ";
 		}
 		else if (iter->getDireccionPostal().size() == 1)
 		{
