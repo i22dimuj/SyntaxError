@@ -111,6 +111,12 @@ bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo) {
 		contactoNuevo.addTelefono(contactoViejo.getTelefono());
 	}
 
+	list <redSocial>:: iterator i = contactoViejo.getRedSocial().begin();
+	contactoNuevo.addRedSocial(*i);
+
+	list <direccionPostal>:: iterator ef = contactoViejo.getDireccionPostal().begin();
+	contactoNuevo.addDireccionPostal(*ef);
+
 		borrar(contactoViejo.getDNI());
 		insertar(contactoNuevo);
 
