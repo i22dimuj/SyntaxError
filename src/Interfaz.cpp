@@ -3,8 +3,8 @@
 #include <cstdio>
 #include <string>
 #include "Interfaz.hpp"
-//#include "Agenda.hpp"
-//#include "Contacto.hpp"
+#include "Agenda.hpp"
+#include "Contacto.hpp"
 #include "Estructuras.hpp"
 
 using namespace std;
