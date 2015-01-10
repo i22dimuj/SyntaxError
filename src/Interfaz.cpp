@@ -220,7 +220,7 @@ Contacto Interfaz::rellenarContacto() {
 	cin >> dni;
 	contacto.setDNI(dni);
 
-	cout << "¿Quiere introducir un email?: ";
+	cout << "¿Quiere introducir un email? (s/n): ";
 	cin >> confirmacion;
 	if(confirmacion == "s") {
 		cout << "Inserte el email: ";
@@ -229,8 +229,6 @@ Contacto Interfaz::rellenarContacto() {
 		email =" ";
 	}
 	contacto.setEmail(email);
-
-	cout << "El email es \"" << contacto.getEmail() << "\"" << endl;
 
 	cout<<"Introduce el telefono del nuevo Contacto: ";
 	cin >> telefono;

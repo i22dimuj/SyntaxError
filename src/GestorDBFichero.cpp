@@ -171,7 +171,7 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 			getline(file, telefono, ',');
 			telefonos.push_back(telefono);
 			cont--;
-			cout << "";//Error de buffer sin el
+			cout << flush;
 		}
 
 		//Leemos las redes sociales
