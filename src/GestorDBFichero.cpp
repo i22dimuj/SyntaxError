@@ -204,9 +204,15 @@ list<Contacto> GestorDBFichero::cargar(const string &fichero) {
 			}
 
 			getline(file, favorito, ',');
+			cout << favorito;
 			int intFavorito = atoi(favorito.c_str());
-			if(intFavorito == '1')
+			cout << intFavorito << endl;
+			cout << contacto.esFavorito() << endl;
+
+			if(intFavorito == 1)
 				contacto.cambiaFavorito();
+
+			cout << contacto.esFavorito() << endl;;
 
 			getline(file, busquedas, '\n');
 			contacto.setFrecuente(atoi(busquedas.c_str()));

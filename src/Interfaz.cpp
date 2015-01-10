@@ -135,6 +135,9 @@ bool Interfaz::menuFuncion(int opc)
 
 		case 8: //Mostrar favoritos
 			verFavoritos();
+			cout << endl << "Pulse enter para continuar";
+			getchar();
+			getchar();
 			break;
 
 		case 0: //Salir
@@ -314,8 +317,14 @@ void Interfaz::verFavoritos()
 	list <Contacto> aux = _agenda.getContactos();
 	system("clear");
 	for (list <Contacto>::iterator iter = aux.begin(); iter != aux.end(); iter++)
+	{
 		if(iter->esFavorito())
+		{
 			imprimeContacto(*iter);
+			cout << endl << "<===================================>" << endl;
+		}
+	}
+
 }
 
 void Interfaz::verFrecuentes()

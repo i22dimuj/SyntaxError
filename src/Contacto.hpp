@@ -53,7 +53,7 @@ class Contacto {
 		void addDireccionPostal(direccionPostal direccion) {_direccionPostal.push_back(direccion);};
 		void addRedSocial(redSocial red) {_redSocial.push_back(red);};
 		void buscado() {_frecuente++;};
-		void cambiaFavorito() { _favorito ? _favorito = false : _favorito = true;}; //if(true) _fav= false; else _fav = true;
+		void cambiaFavorito(); //if(true) _fav= false; else _fav = true;
 };
 #endif
 

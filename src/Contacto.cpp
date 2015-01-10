@@ -22,3 +22,11 @@ Contacto::Contacto(string dni, string nombre, string apellido1, string apellido2
 	_favorito = false;
 	_frecuente = 0;
 }
+
+void Contacto::cambiaFavorito()
+{
+	if (_favorito)
+		_favorito = false;
+	else
+		_favorito = true;
+}
