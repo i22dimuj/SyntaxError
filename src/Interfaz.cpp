@@ -17,13 +17,14 @@ Interfaz::Interfaz(Agenda &a) {
 	_agenda.setFrecuentes(a.getFrecuentes());
 }
 
-void Interfaz::menuAgenda()
+void Interfaz::menuAgenda(string fichero)
 {
 	int seleccion;
 
 	do {
 	system("clear");
-	cout << "----- Agenda -----" << endl << endl;
+	cout << "----- Agenda -----" << endl;
+	cout << "Base de datos cargada: " << fichero << endl << endl;
 	cout << "Menu:" << endl;
 	cout << "1) Buscar contacto" << endl;
 	cout << "2) Añadir contacto" << endl;
@@ -54,6 +55,7 @@ bool Interfaz::menuFuncion(int opc)
 {
 	string dni, apellido;
 	Contacto aux, aux2;
+	string copiaSeguridad = "copiaSeguridad.txt";
 
 	switch(opc) {
 		case 1: //Buscar contacto
@@ -103,7 +105,7 @@ bool Interfaz::menuFuncion(int opc)
 			break;
 
 		case 5: //Copia de seguridad
-				_agenda.getGestorDB()->guardar(_agenda.getContactos());
+				_agenda.getGestorDB()->guardar(_agenda.getContactos(), copiaSeguridad);
 			break;
 
 		case 6: //Borrar contacto

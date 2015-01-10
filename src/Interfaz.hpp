@@ -17,7 +17,7 @@ class Interfaz {
 		Interfaz(Agenda &a);
 		Contacto rellenarContacto();
 		Contacto rellenarContactoModificar();
-		void menuAgenda();
+		void menuAgenda(std::string fichero);
 		bool menuFuncion(int opc); //Devuelve FALSE si no se quiere salir, si se quiere salir devuelve TRUE
 		void imprimirAgenda();
 		void verFavoritos();

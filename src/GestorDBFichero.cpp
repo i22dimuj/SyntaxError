@@ -18,7 +18,7 @@
 
 using namespace std;
 
-bool GestorDBFichero::guardar(list<Contacto> aux) {
+bool GestorDBFichero::guardar(list<Contacto> aux, string nombreFichero) {
 	if(aux.empty())
 	return false;
 
@@ -27,11 +27,7 @@ bool GestorDBFichero::guardar(list<Contacto> aux) {
 	list <redSocial>:: iterator iterr;
 	list <direccionPostal>:: iterator iterd;
 
-	string nombreFichero;
 	ofstream fichero;
-
-	cout << "Introduzca el nombre del fichero donde se guardaran los contactos: "; 
-	cin >> nombreFichero;
 
 	//Abrimos el fichero para escribir
 	fichero.open(nombreFichero.c_str(), ios::out);

@@ -18,7 +18,7 @@ public:
 	/* TODO: Volver a poner const */
 	GestorDB() {};
 	virtual ~GestorDB() {};
-	virtual bool guardar(std::list<Contacto>) = 0;
+	virtual bool guardar(std::list<Contacto>, std::string nombreFichero) = 0;
 	virtual std::list<Contacto> cargar(const std::string &fichero) = 0;
 	virtual std::string getFichero() = 0;
 
