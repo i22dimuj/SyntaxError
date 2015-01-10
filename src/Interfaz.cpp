@@ -46,12 +46,12 @@ void Interfaz::menuAgenda(string fichero)
 		cout << "Seleccione una opcion valida (persione enter): " << endl;
 		getchar();
 	} else {
-		menuFuncion(seleccion, fichero);
+		menuFuncion(seleccion);
 	}
 	} while (true);
 }
 
-bool Interfaz::menuFuncion(int opc, string fichero)
+bool Interfaz::menuFuncion(int opc)
 {
 	string dni, apellido;
 	Contacto aux, aux2;
@@ -73,7 +73,7 @@ bool Interfaz::menuFuncion(int opc, string fichero)
 			_agenda.insertar(aux);
 			cout << endl << "Contacto insertado correctamente." << endl;
 			cout << "Pulse enter para continuar";
-			_agenda.getGestorDB()->guardar(_agenda.getContactos(), fichero);
+			_agenda.guardar();
 			getchar();
 			getchar();
 			break;
@@ -95,7 +95,7 @@ bool Interfaz::menuFuncion(int opc, string fichero)
 			aux2 = rellenarContactoModificar();
 
 			_agenda.modificar(aux, aux2);
-			_agenda.getGestorDB()->guardar(_agenda.getContactos(), fichero);
+			_agenda.guardar();
 
 			break;
 
@@ -116,7 +116,7 @@ bool Interfaz::menuFuncion(int opc, string fichero)
 
 			if (_agenda.borrar(dni))
 			{
-				_agenda.getGestorDB()->guardar(_agenda.getContactos(), fichero);
+				_agenda.guardar();
 				cout << "Borrado efectuado con exito" << endl;
 			}
 			else

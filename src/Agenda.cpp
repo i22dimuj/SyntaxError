@@ -82,6 +82,8 @@ void Agenda::ordenaAgenda(list <Contacto> lista)
 //Se llama con un contacto ya relleno y se iguala al viejo
 bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 {
+	string fav;
+
 	if (contactoNuevo.getNombre() == "")
 		contactoNuevo.setNombre(contactoViejo.getNombre());
 	if (contactoNuevo.getApellido1() == "")
@@ -94,10 +96,36 @@ bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
 	//Elimina la lista anterior de telefonos, se sustituye por la nueva  ???
 	// ARREGLAR
 
-		if (*(contactoNuevo.getTelefono().begin()) == "") {
-			contactoNuevo.removeTelefono();
-			contactoNuevo.addTelefono(contactoViejo.getTelefono());
-		}
+	if (*(contactoNuevo.getTelefono().begin()) == "") {
+		contactoNuevo.removeTelefono();
+		contactoNuevo.addTelefono(contactoViejo.getTelefono());
+	}
+
+	if(contactoViejo.esFavorito()){
+
+		cout << "El contacto SI esta en la lista de favoritos" << endl;
+		cout << "¿Quieres que deje de ser favorito? (s/n):";
+
+		cin >> fav;
+
+		//Al declarar contactoNuevo, por defecto estara como NO favorito
+		if(fav != "s")
+			contactoNuevo.cambiaFavorito();
+	}
+
+	else{
+
+		cout << "El contacto NO esta en la lista de favoritos" << endl;
+		cout << "¿Quieres que sea favorito? (s/n):";
+
+		cin >> fav;
+
+		if(fav == "s")
+			contactoNuevo.cambiaFavorito();
+
+
+	}
+
 
 		//Estas dos no serían con this. ???
 		borrar(contactoViejo.getDNI());
