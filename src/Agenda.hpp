@@ -23,6 +23,8 @@ class Agenda {
 		Agenda(GestorDB* g);
 		Agenda(Agenda &agenda);
 
+		bool operator <(const Contacto &c);
+
 		std::string getFichero() {return fichero;};  //<----- Observadores añadidos a la fuerza
 		GestorDB* getGestorDB() {return _bd;};		//<----- Para constructor de copia
 		std::list <Contacto> getContactos() {return _contactos;};

@@ -74,10 +74,19 @@ bool Agenda::comparaContactos(const Contacto &a, const Contacto &b)
 	return a.getApellido1() < b.getApellido1();
 }
 
+
+bool operator<(const Contacto &ci, const Contacto &cd){
+
+	return (ci.getApellido1() < cd.getApellido1());
+}
+
 void Agenda::ordenaAgenda(list <Contacto> lista)
 {
-	//lista.sort(comparaContactos); No Funka :'(
+	//lista.sort(comparaContactos);
+	lista.sort();
 }
+
+
 
 //Se llama con un contacto ya relleno y se iguala al viejo
 bool Agenda::modificar(Contacto contactoViejo, Contacto contactoNuevo)
